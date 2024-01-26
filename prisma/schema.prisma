@@ -11,9 +11,10 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
+// https://docs.hanko.io/tutorials/nextjs-todo
 model Todo {
 
- id String @id @default(uuid())
+  id String @id @default(uuid())
   title String
   description String
   complete Boolean
