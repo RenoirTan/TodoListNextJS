@@ -1,0 +1,24 @@
+version: "3"
+name: "todolistnextjs"
+services:
+  app:
+    build: .
+    command: npm run dev
+    environment:
+      DATABASE_URL: "${DATABASE_URL}"
+    volumes:
+      - .:/app
+    ports:
+      - 3000:3000
+    depends_on:
+      - postgres
+  postgres: # database url must either use 'postgres' or '127.0.0.1' as the host, not 'localhost'
+    image: postgres:16.1
+    environment:
+      POSTGRES_USER: ${POSTGRES_USER}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
+      POSTGRES_DB: ${POSTGRES_DB}
+    ports:
+      - 5432:5432
+    volumes:
+      - ./data:/var/lib/postgresql/data

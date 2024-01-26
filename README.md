@@ -38,8 +38,12 @@ Check out our [Next.js deployment documentation](https://nextjs.org/docs/deploym
 ## Pain and Suffering
 
 ```bash
-# Manually start postgres docker
-docker run --env-file .env -p 5432:5432 postgres:16.1
+# Run 
+docker compose up -d
+
 # You must do this before doing anything else, including seeding!
 npx prisma migrate dev --name init
+
+# Optionally seed the database
+npm run seed
 ```
