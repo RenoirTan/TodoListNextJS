@@ -1,7 +1,7 @@
 "use client";
 
 import { Todo } from "@prisma/client";
-import { formEditTodo } from "@/lib/actions";
+import { deleteTodo, formEditTodo } from "@/lib/actions";
 import { useFormState } from "react-dom";
 
 // pass `todo` instead of id because otherwise every time the form gets submitted,
@@ -10,6 +10,7 @@ export default function EditForm({ todo }: { todo: Todo }) {
   const initialState = { message: "", errors: {} };
   const formEditTodoById = formEditTodo.bind(null, todo.id);
   const [state, dispatch] = useFormState(formEditTodoById, initialState);
+  const deleteTodoById = deleteTodo.bind(null, todo.id);
 
   return (
     <>
@@ -54,6 +55,9 @@ export default function EditForm({ todo }: { todo: Todo }) {
           ))
         }
         <button type="submit">Edit Todo Item</button>
+      </form>
+      <form action={deleteTodoById}>
+        <button type="submit">Delete Todo Item</button>
       </form>
     </>
   );

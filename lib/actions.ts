@@ -75,3 +75,14 @@ export async function formEditTodo(
   revalidatePath("/");
   redirect("/");
 }
+
+export async function deleteTodo(id: string) {
+  try {
+    const todo = await prisma.todo.delete({ where: { id } });
+  } catch (err: any) {
+    return { message: "not found" };
+  }
+  
+  revalidatePath("/");
+  redirect("/");
+}
