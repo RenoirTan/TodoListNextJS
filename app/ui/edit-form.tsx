@@ -44,7 +44,7 @@ export default function EditForm({ todo }: { todo: Todo }) {
         <input
           name="complete"
           type="checkbox"
-          checked={todo.complete}
+          defaultChecked={todo.complete}
         />
         {state.errors?.complete &&
           state.errors.complete.map((error: string) => (
