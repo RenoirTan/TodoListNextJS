@@ -15,17 +15,29 @@ export default function CreateForm() {
       <form action={dispatch} className="flex flex-col">
         {/* TODO: Remove the text-black and stuff later */}
         <input name="title" type="text" className="text-black" />
-        {state.errors?.title?.map((msg: string) => {
-          <p key={msg}>{msg}</p>
-        })}
+        {state.errors?.title &&
+          state.errors.title.map((error: string) => (
+            <p className="mt-2 text-sm text-red-500" key={error}>
+              {error}
+            </p>
+          ))
+        }
         <textarea name="description" className="text-black"></textarea>
-        {state.errors?.description?.map((msg: string) => {
-          <p key={msg}>{msg}</p>
-        })}
+        {state.errors?.description &&
+          state.errors.description.map((error: string) => (
+            <p className="mt-2 text-sm text-red-500" key={error}>
+              {error}
+            </p>
+          ))
+        }
         <input name="complete" type="checkbox" />
-        {state.errors?.complete?.map((msg: string) => {
-          <p key={msg}>{msg}</p>
-        })}
+        {state.errors?.complete &&
+          state.errors.complete.map((error: string) => (
+            <p className="mt-2 text-sm text-red-500" key={error}>
+              {error}
+            </p>
+          ))
+        }
         <button type="submit">Create Todo Item</button>
       </form>
     </>

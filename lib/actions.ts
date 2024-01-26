@@ -7,13 +7,13 @@ import prisma, { TodoCreateInput } from "@/db";
 export type State = {
   errors?: {
     title?: string[];
-    amount?: string[];
-    status?: string[];
+    description?: string[];
+    complete?: string[];
   };
   message?: string | null
 };
 
-export async function formCreateTodo(prevState: State, formData: FormData) {
+export async function formCreateTodo(prevState: State, formData: FormData): Promise<State> {
   const validated = TodoCreateInput.safeParse({
     title: formData.get("title")?.toString(),
     description: formData.get("description")?.toString(),
