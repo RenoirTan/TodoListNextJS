@@ -3,12 +3,13 @@
 import { PrismaClient, Prisma } from '@prisma/client'
 import { z } from "zod";
 
+export const TodoCreateInput = z.object({
+  title: z.string(),
+  description: z.string(),
+  complete: z.coerce.boolean(),
+}) satisfies z.Schema<Prisma.TodoCreateInput>;
+
 const prismaClientSingleton = () => {
-  const TodoCreateInput = z.object({
-    title: z.string(),
-    description: z.string(),
-    complete: z.boolean(),
-  }) satisfies z.Schema<Prisma.TodoCreateInput>;
   return new PrismaClient().$extends({
     query: {
       todo: {

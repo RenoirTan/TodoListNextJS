@@ -2,27 +2,39 @@
 
 import { revalidatePath } from "next/cache";
 import { redirect } from "next/navigation";
-import prisma from "@/db";
+import prisma, { TodoCreateInput } from "@/db";
 
 export type State = {
-  errors?: {};
+  errors?: {
+    title?: string[];
+    amount?: string[];
+    status?: string[];
+  };
   message?: string | null
 };
 
 export async function formCreateTodo(prevState: State, formData: FormData) {
-  const data = {
+  const validated = TodoCreateInput.safeParse({
     title: formData.get("title")?.toString(),
     description: formData.get("description")?.toString(),
-    complete: !!formData.get("complete")
-  };
-  
-  console.log(data);
+    complete: formData.get("complete")
+  });
+
+  if (!validated.success) {
+    const sendBack = {
+      errors: validated.error.flatten().fieldErrors,
+      message: "Invalid fields"
+    };
+    console.log(sendBack);
+    return sendBack;
+  }
 
   try {
-    const todo = await prisma.todo.create({ data });
+    const todo = await prisma.todo.create({ data: validated.data });
   } catch (err: any) {
-    console.log(err);
-    return { errors: {}, message: "Something went wrong." };
+    const sendBack = { errors: err.flatten().fieldErrors, message: "Something went wrong." };
+    console.log(sendBack);
+    return sendBack;
   }
 
   revalidatePath("/");
