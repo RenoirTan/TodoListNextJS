@@ -1,12 +1,22 @@
 "use client";
 
 import { Todo } from "@prisma/client";
-import { deleteTodo, formEditTodo } from "@/lib/actions";
+import { deleteTodo, formEditTodo, getTodo } from "@/lib/actions";
 import { useFormState } from "react-dom";
+import { notFound } from "next/navigation";
 
 // pass `todo` instead of id because otherwise every time the form gets submitted,
 // the database would get hit (because immutability)
-export default function EditForm({ todo }: { todo: Todo }) {
+export default async function EditForm({ todoId }: { todoId: string }) {
+  const todo = await getTodo(todoId);
+  if (!todo) {
+    notFound();
+  }
+
+  return <EditFormInner todo={todo} />;
+}
+
+export async function EditFormInner({ todo }: { todo: Todo }) {
   const initialState = { message: "", errors: {} };
   const formEditTodoById = formEditTodo.bind(null, todo.id);
   const [state, dispatch] = useFormState(formEditTodoById, initialState);

@@ -1,4 +1,4 @@
-import { getRecentTodos } from "@/lib/data";
+import { getRecentTodos } from "@/lib/actions";
 import Link from "next/link";
 
 export default async function Home() {
