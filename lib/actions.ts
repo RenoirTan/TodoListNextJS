@@ -40,3 +40,38 @@ export async function formCreateTodo(prevState: State, formData: FormData): Prom
   revalidatePath("/");
   redirect("/");
 }
+
+export async function formEditTodo(
+  id: string,
+  prevState: State,
+  formData: FormData
+): Promise<State> {
+  const validated = TodoCreateInput.safeParse({
+    title: formData.get("title")?.toString(),
+    description: formData.get("description")?.toString(),
+    complete: formData.get("complete")
+  });
+
+  if (!validated.success) {
+    const sendBack = {
+      errors: validated.error.flatten().fieldErrors,
+      message: "Invalid fields"
+    };
+    console.log(sendBack);
+    return sendBack;
+  }
+
+  try {
+    const todo = await prisma.todo.update({
+      where: { id },
+      data: validated.data
+    });
+  } catch (err: any) {
+    const sendBack = { errors: err.flatten().fieldErrors, message: "Something went wrong." };
+    console.log(sendBack);
+    return sendBack;
+  }
+
+  revalidatePath("/");
+  redirect("/");
+}
