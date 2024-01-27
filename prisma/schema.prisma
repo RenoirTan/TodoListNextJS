@@ -11,13 +11,30 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
+// https://www.prisma.io/docs/orm/prisma-schema/data-model/models
+model User {
+  id    String  @id @default(uuid())
+  email String  @unique
+  name  String?
+  role  Role    @default(USER)
+  todos Todo[]
+}
+
 // https://docs.hanko.io/tutorials/nextjs-todo
 model Todo {
-
-  id String @id @default(uuid())
-  title String
+  id          String   @id @default(uuid())
+  title       String
   description String
-  complete Boolean
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
+  complete    Boolean
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+// temporarily set to optional otherwise prisma will complain that there
+// are no default values for the below fields since they would be newly created
+  author      User?    @relation(fields: [authorId], references: [id])
+  authorId    String?
+}
+
+enum Role {
+  USER
+  ADMIN
 }
