@@ -13,10 +13,11 @@ datasource db {
 
 // https://www.prisma.io/docs/orm/prisma-schema/data-model/models
 model User {
-  id    String  @id @default(uuid())
-  email String  @unique
+  id    String     @id @default(uuid())
+  email String     @unique
+  password String?
   name  String?
-  role  Role    @default(USER)
+  role  Role       @default(USER)
   todos Todo[]
 }
 
