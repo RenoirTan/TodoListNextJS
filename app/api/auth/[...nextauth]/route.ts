@@ -35,7 +35,8 @@ const credentialsProvider = CredentialsProvider({
 const handler = NextAuth({
   providers: [
     credentialsProvider
-  ]
+  ],
+  secret: process.env.NEXTAUTH_SECRET as string
 });
 
 export { handler as GET, handler as POST };
