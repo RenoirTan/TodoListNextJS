@@ -3,6 +3,19 @@
 import { revalidatePath } from "next/cache";
 import { redirect } from "next/navigation";
 import prisma, { TodoCreateInput } from "@/db";
+import { Todo } from "@prisma/client";
+
+export async function getRecentTodos() {
+  console.log("getRecentTodos");
+  return await prisma.todo.findMany();
+}
+
+export async function getTodo(id: string): Promise<Todo | null> {
+  console.log("getTodo");
+  const todo = await prisma.todo.findUnique({ where: { id } });
+  return todo;
+}
+
 
 export type State = {
   errors?: {

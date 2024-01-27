@@ -1,12 +1,15 @@
 import EditForm from "@/app/ui/edit-form";
-import { getTodo } from "@/lib/data";
-import { notFound } from "next/navigation";
+import EditFormSkeleton from "@/app/ui/skeletons/edit-form-skeleton";
+import { Suspense } from "react";
 
 export default async function Page({ params }: { params: { id: string } }) {
-  const todo = await getTodo(params.id);
-  if (!todo) {
-    notFound();
-  }
-  
-  return <EditForm todo={todo} />
+  // Page (server) has suspense
+  // EditForm (server) loads Todo
+  // EditFormInner (client) handles form stuff
+  // This is why you get sleep
+  return (
+    <Suspense fallback={<EditFormSkeleton />}>
+      <EditForm todoId={params.id} />
+    </Suspense>
+  );
 }
