@@ -41,7 +41,10 @@ const { handlers: { GET, POST }, auth, signIn, signOut } = NextAuth({
   providers: [
     credentialsProvider
   ],
-  secret: process.env.NEXTAUTH_SECRET as string
+  secret: process.env.NEXTAUTH_SECRET as string,
+  session: {
+    strategy: "jwt"
+  }
 });
 
 export { GET, POST, auth, signIn, signOut };
