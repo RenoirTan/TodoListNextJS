@@ -32,11 +32,11 @@ const credentialsProvider = CredentialsProvider({
   }
 });
 
-const handler = NextAuth({
+const { handlers: { GET, POST }, auth, signIn, signOut } = NextAuth({
   providers: [
     credentialsProvider
   ],
   secret: process.env.NEXTAUTH_SECRET as string
 });
 
-export { handler as GET, handler as POST };
+export { GET, POST, signIn, signOut };
