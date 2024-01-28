@@ -3,7 +3,7 @@
 import bcrypt from "bcrypt";
 import { AuthError } from "next-auth";
 import prisma from "@/db";
-import { signIn } from "@/app/api/auth/[...nextauth]/route";
+import { signIn } from "@/auth";
 // import { signIn } from "next-auth/react";
 
 export async function getUser(email: string) {
