@@ -1,14 +1,18 @@
 import prisma from "@/db";
 import { insert, runner } from "./seeding";
-import { hashPassword } from "@/lib/auth";
+import bcrypt from "bcrypt";
 
-(async () => {
+export function hashPasswordSync(password: string) {
+  return bcrypt.hashSync(password, 10);
+}
+
+(() => {
   const data = [
     {
       email: "renoir@example.com",
       name: "renoir",
       role: "ADMIN",
-      password: await hashPassword("12345678")
+      password: hashPasswordSync("12345678")
     }
   ];
 

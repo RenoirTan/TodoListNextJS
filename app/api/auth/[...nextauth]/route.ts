@@ -1,7 +1,9 @@
 import { comparePassword, getUser } from "@/lib/auth";
+import { PrismaAdapter } from "@auth/prisma-adapter";
 import NextAuth from "next-auth";
 import CredentialsProvider from "next-auth/providers/credentials";
 import { z } from "zod";
+import prisma from "@/db";
 
 const credentialsValidator = z.object({
   email: z.string().email(),
@@ -33,6 +35,7 @@ const credentialsProvider = CredentialsProvider({
 });
 
 const { handlers: { GET, POST }, auth, signIn, signOut } = NextAuth({
+  adapter: PrismaAdapter(prisma),
   providers: [
     credentialsProvider
   ],
