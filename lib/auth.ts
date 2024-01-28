@@ -2,8 +2,9 @@
 
 import bcrypt from "bcrypt";
 import { AuthError } from "next-auth";
+import { redirect } from "next/navigation";
 import prisma from "@/db";
-import { signIn } from "@/auth";
+import { createUserCredentialsValidator, signIn } from "@/auth";
 // import { signIn } from "next-auth/react";
 
 export async function getUser(email: string) {
@@ -30,6 +31,53 @@ export async function authenticate(prevState: string | undefined, formData: Form
     }
     throw err;
   }
+}
+
+export async function createUser(email: string, password: string) {
+  const hashedPassword = await hashPassword(password);
+  const user = await prisma.user.create({
+    data: {
+      email,
+      password: hashedPassword
+    }
+  });
+  return user;
+}
+
+export type CreateUserState = {
+  errors?: {
+    email?: string[];
+    password?: string[];
+    confirmPassword?: string[];
+  };
+  message?: string | null
+};
+
+export async function formCreateUser(prevState: CreateUserState, formData: FormData) {
+  const parsedCredentials = createUserCredentialsValidator.safeParse({
+    email: formData.get("email")?.toString(),
+    password: formData.get("password")?.toString(),
+    confirmPassword: formData.get("confirm-password")?.toString()
+  });
+
+  if (!parsedCredentials.success) {
+    const sendBack = {
+      errors: parsedCredentials.error.flatten().fieldErrors,
+      message: "Invalid fields"
+    };
+    console.log(sendBack);
+    return sendBack;
+  }
+
+  try {
+    const user = await createUser(parsedCredentials.data.email, parsedCredentials.data.password);
+  } catch (err: any) {
+    const sendBack = { errors: err.flatten().fieldErrors, message: "Something went wrong." };
+    console.log(sendBack);
+    return sendBack;
+  }
+
+  redirect("/");
 }
 
 export async function hashPassword(password: string) {

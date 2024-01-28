@@ -6,10 +6,20 @@ import { z } from "zod";
 import prisma from "@/db";
 import { authConfig } from "./auth.config";
 
-const credentialsValidator = z.object({
+export const credentialsValidator = z.object({
   email: z.string().email(),
   password: z.string().min(8)
 });
+
+export const createUserCredentialsValidator = credentialsValidator
+  .extend({ confirmPassword: z.string() })
+  .refine(
+    (data) => data.password === data.confirmPassword,
+    {
+      message: "Passwords don't match.",
+      path: ["confirmPassword"]
+    }
+  );
 
 const credentialsProvider = CredentialsProvider({
   name: "Credentials",
