@@ -1,4 +1,4 @@
-import { getRecentTodos } from "@/lib/actions";
+import { getRecentTodos } from "@/lib/todos";
 import TodosListInner from "./todos-list-inner";
 
 export default async function TodosList({

@@ -1,6 +1,6 @@
 "use client";
 
-import { formCreateTodo } from "@/lib/actions";
+import { formCreateTodo } from "@/lib/todos";
 import { useFormState } from "react-dom";
 
 export default function CreateForm() {

@@ -1,7 +1,7 @@
 "use client";
 
 import { Todo } from "@prisma/client";
-import { deleteTodo, formEditTodo } from "@/lib/actions";
+import { deleteTodo, formEditTodo } from "@/lib/todos";
 import { useFormState } from "react-dom";
 
 export async function EditFormInner({ todo }: { todo: Todo }) {

@@ -1,4 +1,4 @@
-import { getTodo } from "@/lib/actions";
+import { getTodo } from "@/lib/todos";
 import { notFound } from "next/navigation";
 import { EditFormInner } from "./edit-form-inner";
 
