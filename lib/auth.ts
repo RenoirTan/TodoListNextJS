@@ -4,7 +4,12 @@ import bcrypt from "bcrypt";
 import { AuthError } from "next-auth";
 import { redirect } from "next/navigation";
 import prisma from "@/db";
-import { createUserCredentialsValidator, signIn } from "@/auth";
+import {
+  auth,
+  changePasswordCredentialsValidator,
+  createUserCredentialsValidator,
+  signIn
+} from "@/auth";
 // import { signIn } from "next-auth/react";
 
 export async function getUser(email: string) {
@@ -80,6 +85,72 @@ export async function formCreateUser(prevState: CreateUserState, formData: FormD
   redirect("/");
 }
 
+export type ChangePasswordState = {
+  errors?: {
+    email?: string[];
+    originalPassword?: string[];
+    password?: string[]; // new password
+    confirmPassword?: string[];
+  };
+  message?: string | null
+};
+
+export async function changePassword(id: string, originalPassword: string, newPassword: string) {
+  return await prisma.$transaction(async (tx) => {
+    const user = await tx.user.findUniqueOrThrow({ where: { id } });
+    if (!await comparePassword(originalPassword, user.password || "")) {
+      throw "Wrong Password.";
+    }
+    const password = await hashPassword(newPassword);
+    return await tx.user.update({
+      where: { id },
+      data: { password }
+    });
+  });
+}
+
+export async function formChangePassword(prevState: ChangePasswordState, formData: FormData) {
+  const session = await auth();
+  if (!session) {
+    return { message: "Not logged in" };
+  }
+  console.log(session);
+  const id = session.user?.id;
+  if (!id) {
+    return { message: "Session's user does not have an id???" };
+  }
+
+  const parsedCredentials = changePasswordCredentialsValidator.safeParse({
+    oldPassword: formData.get("old-password")?.toString(),
+    password: formData.get("password")?.toString(),
+    confirmPassword: formData.get("confirm-password")?.toString()
+  });
+
+  if (!parsedCredentials.success) {
+    const sendBack = {
+      errors: parsedCredentials.error.flatten().fieldErrors,
+      message: "Invalid fields"
+    };
+    console.log(sendBack);
+    return sendBack;
+  }
+
+  try {
+    const { oldPassword, password } = parsedCredentials.data;
+    const user = await changePassword(id, oldPassword, password);
+  } catch (err: any) {
+    if (err instanceof String) {
+      return { errors: { oldPassword: [err] }, message: "Invalid fields" };
+    } else {
+      const sendBack = { errors: err.flatten().fieldErrors, message: "Something went wrong." };
+      console.log(sendBack);
+      return sendBack;
+    }
+  }
+
+  redirect("/");
+}
+ 
 export async function hashPassword(password: string) {
   return await bcrypt.hash(password, 10);
 }

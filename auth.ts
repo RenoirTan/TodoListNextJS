@@ -1,6 +1,6 @@
 import { comparePassword, getUser } from "@/lib/auth";
 import { PrismaAdapter } from "@auth/prisma-adapter";
-import NextAuth, { NextAuthConfig } from "next-auth";
+import NextAuth from "next-auth";
 import CredentialsProvider from "next-auth/providers/credentials";
 import { z } from "zod";
 import prisma from "@/db";
@@ -11,15 +11,27 @@ export const credentialsValidator = z.object({
   password: z.string().min(8)
 });
 
-export const createUserCredentialsValidator = credentialsValidator
-  .extend({ confirmPassword: z.string() })
-  .refine(
-    (data) => data.password === data.confirmPassword,
-    {
-      message: "Passwords don't match.",
-      path: ["confirmPassword"]
-    }
-  );
+const passwordsMatchValidator = (data: { password: string; confirmPassword: string }) => {
+  return data.password === data.confirmPassword;
+};
+
+const passwordsDontMatchParams = () => {
+  return {
+    message: "Passwords don't match.",
+    path: ["confirmPassword"]
+  }
+};
+
+const createUserCredentialsObject = credentialsValidator
+  .extend({ confirmPassword: z.string() });
+
+export const createUserCredentialsValidator = createUserCredentialsObject
+  .refine(passwordsMatchValidator, passwordsDontMatchParams());
+
+export const changePasswordCredentialsValidator = createUserCredentialsObject
+  .omit({ email: true })
+  .extend({ oldPassword: z.string().min(8) })
+  .refine(passwordsMatchValidator, passwordsDontMatchParams());
 
 const credentialsProvider = CredentialsProvider({
   name: "Credentials",
@@ -54,6 +66,16 @@ const { handlers: { GET, POST }, auth, signIn, signOut } = NextAuth({
   secret: process.env.NEXTAUTH_SECRET as string,
   session: {
     strategy: "jwt"
+  },
+  callbacks: {
+    // https://logfetch.com/next-auth-get-user-database-id-from-session/
+    async session({ session, token }) {
+      if (session?.user) {
+        session.user.id = token.sub;
+      }
+
+      return session;
+    }
   }
 });
 
