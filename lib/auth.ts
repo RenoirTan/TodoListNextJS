@@ -12,10 +12,13 @@ import {
 } from "@/auth";
 // import { signIn } from "next-auth/react";
 
-export async function getUser(email: string) {
-  console.log(`getUser ${Object.keys(prisma)}`);
+export async function getUser(id: string) {
+  const user = await prisma.user.findUnique({ where: { id } });
+  return user;
+}
+
+export async function getUserByEmail(email: string) {
   const user = await prisma.user.findUnique({ where: { email } });
-  console.log(user);
   return user;
 }
 
@@ -148,6 +151,20 @@ export async function formChangePassword(prevState: ChangePasswordState, formDat
     }
   }
 
+  redirect("/");
+}
+
+export async function changeName(id: string, name: string | null) {
+  return await prisma.user.update({ where: { id }, data: { name } });
+}
+
+export async function formChangeName(id: string, prevState: string | null, formData: FormData) {
+  const name: string | null = formData.get("name")?.toString() || null;
+  try {
+    const user = await changeName(id, name);
+  } catch (err: any) {
+    return "Something went wrong."
+  }
   redirect("/");
 }
  

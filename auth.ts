@@ -1,4 +1,4 @@
-import { comparePassword, getUser } from "@/lib/auth";
+import { comparePassword, getUserByEmail } from "@/lib/auth";
 import { PrismaAdapter } from "@auth/prisma-adapter";
 import NextAuth from "next-auth";
 import CredentialsProvider from "next-auth/providers/credentials";
@@ -44,7 +44,7 @@ const credentialsProvider = CredentialsProvider({
     
     if (parsedCredentials.success) {
       const { email, password } = parsedCredentials.data;
-      const user = await getUser(email);
+      const user = await getUserByEmail(email);
       if (!user || !user.password) {
         return null;
       }

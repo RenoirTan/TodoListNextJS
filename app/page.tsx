@@ -14,6 +14,7 @@ export default async function Home() {
     <main className="flex min-h-screen flex-col items-center p-24">
       <LogoutButton />
       <Link href="/change-password">Change Password</Link>
+      <Link href="/change-name">Change Name</Link>
       <Link href="/create">Create Todo Item</Link>
       <Suspense fallback={<TodosSkeleton />}>
         <TodosList page={1} query={""} authorId={session?.user?.id || ""} />
