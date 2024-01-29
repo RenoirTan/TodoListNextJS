@@ -1,6 +1,6 @@
 "use client";
 
-import { formCreateUser } from "@/lib/auth";
+import { formCreateUser } from "@/lib/users";
 import { useFormState } from "react-dom";
 
 export default async function RegisterForm() {

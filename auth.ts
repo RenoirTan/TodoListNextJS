@@ -1,4 +1,4 @@
-import { comparePassword, getUserByEmail, getUser } from "@/lib/auth";
+import { comparePassword, getUserByEmail, getUser } from "@/lib/users";
 import { PrismaAdapter } from "@auth/prisma-adapter";
 import NextAuth from "next-auth";
 import CredentialsProvider from "next-auth/providers/credentials";

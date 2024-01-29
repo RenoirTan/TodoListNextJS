@@ -1,6 +1,6 @@
 "use client";
 
-import { formChangeName } from "@/lib/auth";
+import { formChangeName } from "@/lib/users";
 import { useFormState } from "react-dom";
 
 export default async function ChangeNameFormInner({ userName }: { userName?: string | null; }) {

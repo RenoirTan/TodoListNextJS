@@ -1,6 +1,6 @@
 "use client";
 
-import { authenticate } from "@/lib/auth";
+import { authenticate } from "@/lib/users";
 import { useFormState, useFormStatus } from "react-dom";
 
 export default function LoginForm() {

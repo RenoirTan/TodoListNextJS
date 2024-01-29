@@ -1,6 +1,6 @@
 "use client";
 
-import { formChangePassword } from "@/lib/auth";
+import { formChangePassword } from "@/lib/users";
 import { useFormState } from "react-dom";
 
 export default async function ChangePasswordForm() {

@@ -1,4 +1,4 @@
-import { getUser } from "@/lib/auth";
+import { getUser } from "@/lib/users";
 import { notFound } from "next/navigation";
 import ChangeNameFormInner from "./change-name-form-inner";
 

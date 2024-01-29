@@ -4,7 +4,7 @@ import TodosSkeleton from "@/app/ui/skeletons/todos-skeleton";
 import TodosList from "@/app/ui/todos-list";
 import LogoutButton from "@/app/ui/logout-button";
 import { auth } from "@/auth";
-import { getUser } from "@/lib/auth";
+import { getUser } from "@/lib/users";
 import { notFound } from "next/navigation";
 
 export default async function Home() {
