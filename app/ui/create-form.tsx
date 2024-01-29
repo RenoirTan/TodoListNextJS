@@ -7,8 +7,6 @@ export default function CreateForm() {
   const initialState = { message: "", errors: {} };
   const [state, dispatch] = useFormState(formCreateTodo, initialState);
 
-  console.log(state);
-
   return (
     <>
       {(state.message) ? <p>{state.message}</p> : <p>Ok</p>}

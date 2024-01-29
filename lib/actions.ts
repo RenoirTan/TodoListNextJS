@@ -4,20 +4,20 @@ import { revalidatePath } from "next/cache";
 import { redirect } from "next/navigation";
 import prisma, { TodoCreateInput } from "@/db";
 import { Todo } from "@prisma/client";
+import { auth } from "@/auth";
+import { signIn } from "next-auth/react";
 
-export async function getRecentTodos() {
-  console.log("getRecentTodos");
-  return await prisma.todo.findMany();
+export async function getRecentTodos(authorId: string) {
+  return await prisma.todo.findMany({ where: { authorId }});
 }
 
-export async function getTodo(id: string): Promise<Todo | null> {
-  console.log("getTodo");
-  const todo = await prisma.todo.findUnique({ where: { id } });
+export async function getTodo(id: string, authorId: string): Promise<Todo | null> {
+  const todo = await prisma.todo.findUnique({ where: { id, authorId } });
   return todo;
 }
 
 
-export type State = {
+export type TodoState = {
   errors?: {
     title?: string[];
     description?: string[];
@@ -26,7 +26,16 @@ export type State = {
   message?: string | null
 };
 
-export async function formCreateTodo(prevState: State, formData: FormData): Promise<State> {
+export async function formCreateTodo(prevState: TodoState, formData: FormData): Promise<TodoState> {
+  const session = await auth();
+  if (!session) {
+    return { message: "Not logged in" };
+  }
+  if (!session.user?.id) {
+    return { message: "User does not have id???" }
+  }
+  const authorId = session.user.id;
+
   const validated = TodoCreateInput.safeParse({
     title: formData.get("title")?.toString(),
     description: formData.get("description")?.toString(),
@@ -43,7 +52,14 @@ export async function formCreateTodo(prevState: State, formData: FormData): Prom
   }
 
   try {
-    const todo = await prisma.todo.create({ data: validated.data });
+    const result = await prisma.user.update({
+      where: { id: authorId },
+      data: {
+        todos: {
+          create: { ...validated.data }
+        }
+      }
+    });
   } catch (err: any) {
     const sendBack = { errors: err.flatten().fieldErrors, message: "Something went wrong." };
     console.log(sendBack);
@@ -56,9 +72,18 @@ export async function formCreateTodo(prevState: State, formData: FormData): Prom
 
 export async function formEditTodo(
   id: string,
-  prevState: State,
+  prevState: TodoState,
   formData: FormData
-): Promise<State> {
+): Promise<TodoState> {
+  const session = await auth();
+  if (!session) {
+    return { message: "Not logged in" };
+  }
+  if (!session.user?.id) {
+    return { message: "User does not have id???" }
+  }
+  const authorId = session.user.id;
+
   const validated = TodoCreateInput.safeParse({
     title: formData.get("title")?.toString(),
     description: formData.get("description")?.toString(),
@@ -76,7 +101,7 @@ export async function formEditTodo(
 
   try {
     const todo = await prisma.todo.update({
-      where: { id },
+      where: { id, authorId },
       data: validated.data
     });
   } catch (err: any) {
