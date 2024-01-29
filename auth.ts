@@ -1,4 +1,4 @@
-import { comparePassword, getUserByEmail } from "@/lib/auth";
+import { comparePassword, getUserByEmail, getUser } from "@/lib/auth";
 import { PrismaAdapter } from "@auth/prisma-adapter";
 import NextAuth from "next-auth";
 import CredentialsProvider from "next-auth/providers/credentials";
@@ -69,9 +69,15 @@ const { handlers: { GET, POST }, auth, signIn, signOut } = NextAuth({
   },
   callbacks: {
     // https://logfetch.com/next-auth-get-user-database-id-from-session/
-    async session({ session, token }) {
+    async session({ session, token, trigger }) {
       if (session?.user) {
         session.user.id = token.sub;
+        if (trigger === "update" && session.user.id) {
+          const user = await getUser(session.user.id);
+          if (user) {
+            session.user.name = user.name;
+          }
+        }
       }
 
       return session;

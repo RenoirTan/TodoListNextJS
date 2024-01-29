@@ -158,13 +158,23 @@ export async function changeName(id: string, name: string | null) {
   return await prisma.user.update({ where: { id }, data: { name } });
 }
 
-export async function formChangeName(id: string, prevState: string | null, formData: FormData) {
+export async function formChangeName(prevState: string | null, formData: FormData) {
+  const session = await auth();
+  if (!session) {
+    return "Not logged in";
+  }
+  const id = session.user?.id;
+  if (!id) {
+    return "Session's user does not have an id???";
+  }
+
   const name: string | null = formData.get("name")?.toString() || null;
   try {
     const user = await changeName(id, name);
   } catch (err: any) {
     return "Something went wrong."
   }
+
   redirect("/");
 }
  

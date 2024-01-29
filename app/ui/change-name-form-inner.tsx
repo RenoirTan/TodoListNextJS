@@ -3,15 +3,8 @@
 import { formChangeName } from "@/lib/auth";
 import { useFormState } from "react-dom";
 
-export default async function ChangeNameFormInner({
-  userId,
-  userName
-}: {
-  userId: string;
-  userName?: string | null;
-}) {
-  const formChangeNameById = formChangeName.bind(null, userId);
-  const [state, dispatch] = useFormState(formChangeNameById, "");
+export default async function ChangeNameFormInner({ userName }: { userName?: string | null; }) {
+  const [state, dispatch] = useFormState(formChangeName, "");
 
   return (
     <form action={dispatch}>

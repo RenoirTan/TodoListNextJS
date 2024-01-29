@@ -8,5 +8,5 @@ export default async function ChangeNameForm({ userId }: { userId: string }) {
     notFound();
   }
 
-  return <ChangeNameFormInner userId={userId} userName={user.name} />
+  return <ChangeNameFormInner userName={user.name} />
 }

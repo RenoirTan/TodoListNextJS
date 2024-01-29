@@ -12,6 +12,7 @@ export default async function Home() {
 
   return (
     <main className="flex min-h-screen flex-col items-center p-24">
+      <p>Hello, {session?.user?.name}</p>
       <LogoutButton />
       <Link href="/change-password">Change Password</Link>
       <Link href="/change-name">Change Name</Link>
