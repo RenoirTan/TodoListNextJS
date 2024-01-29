@@ -45,5 +45,6 @@ docker compose up -d
 npx prisma migrate dev --name init
 
 # Optionally seed the database
-npm run seed
+npx tsx prisma/seeduser.ts
+npx tsx prisma/seedtodo.ts
 ```
