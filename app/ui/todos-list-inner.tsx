@@ -6,7 +6,7 @@ import TodoCard from "./todo-card";
 export default async function TodosListInner({ todos }: { todos: Todo[] }) {
   return (
     <div>
-      {todos.map((todo) => <TodoCard todo={todo} />)}
+      {todos.map((todo) => <TodoCard key={todo.id} todo={todo} />)}
     </div>
   )
 }
