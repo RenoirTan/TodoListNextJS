@@ -7,7 +7,8 @@ export default function CredentialsInput({
   name,
   isRequired,
   isDisabled,
-  isReadOnly
+  isReadOnly,
+  defaultValue
 }: {
   type?: string;
   label?: string;
@@ -16,6 +17,7 @@ export default function CredentialsInput({
   isRequired?: boolean;
   isDisabled?: boolean;
   isReadOnly?: boolean;
+  defaultValue?: string
 }) {
   return <Input
     className="mb-3"
@@ -27,5 +29,6 @@ export default function CredentialsInput({
     isRequired={isRequired}
     isDisabled={isDisabled}
     isReadOnly={isReadOnly}
+    defaultValue={defaultValue}
   />;
 }
