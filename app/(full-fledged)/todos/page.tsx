@@ -20,7 +20,7 @@ export default async function Page() {
 
   return (
     <div className="flex justify-center mt-24"> {/* TODO: Remove mt-24 */}
-      <div className="flex flex-col w-4/5 md:max-w-screen-sm items-center gap-y-4">
+      <div className="flex flex-col w-4/5 md:max-w-screen-sm items-center gap-y-8">
         <div className="flex flex-col text-center gap-y-2">
           {/* https://tailwindcss.com/docs/background-clip#cropping-to-text */}
           <p className="text-lg">Hello, <span className="underline decoration-violet font-semibold me-0.5">{user?.name}</span>!</p>
@@ -54,9 +54,11 @@ export default async function Page() {
             </Link>
           </div>
         </div>
-        <Suspense fallback={<TodosSkeleton />}>
-          <TodosList page={1} query={""} authorId={session?.user?.id || ""} />
-        </Suspense>
+        <div className="w-full md:w-4/5">
+          <Suspense fallback={<TodosSkeleton />}>
+            <TodosList page={1} query={""} authorId={session?.user?.id || ""} />
+          </Suspense>
+        </div>
       </div>
     </div>
   );

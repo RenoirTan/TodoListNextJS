@@ -5,7 +5,7 @@ import TodoCard from "./todo-card";
 
 export default async function TodosListInner({ todos }: { todos: Todo[] }) {
   return (
-    <div>
+    <div className="flex flex-col gap-y-4">
       {todos.map((todo) => <TodoCard key={todo.id} todo={todo} />)}
     </div>
   )
