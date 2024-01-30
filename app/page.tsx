@@ -6,6 +6,11 @@ import LogoutButton from "@/app/ui/logout-button";
 import { auth } from "@/auth";
 import { getUser } from "@/lib/users";
 import { notFound } from "next/navigation";
+import {
+  changePassword as changePasswordUrl,
+  changeName as changeNameUrl,
+  createTodo as createTodoUrl
+} from "@/lib/urls";
 
 export default async function Home() {
   const session = await auth();
@@ -18,9 +23,9 @@ export default async function Home() {
     <main className="flex min-h-screen flex-col items-center p-24">
       <p>Hello, {user?.name}</p>
       <LogoutButton />
-      <Link href="/change-password">Change Password</Link>
-      <Link href="/change-name">Change Name</Link>
-      <Link href="/create">Create Todo Item</Link>
+      <Link href={changePasswordUrl()}>Change Password</Link>
+      <Link href={changeNameUrl()}>Change Name</Link>
+      <Link href={createTodoUrl()}>Create Todo Item</Link>
       <Suspense fallback={<TodosSkeleton />}>
         <TodosList page={1} query={""} authorId={session?.user?.id || ""} />
       </Suspense>

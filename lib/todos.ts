@@ -5,7 +5,7 @@ import { redirect } from "next/navigation";
 import prisma, { TodoCreateInput } from "@/db";
 import { Todo } from "@prisma/client";
 import { auth } from "@/auth";
-import { signIn } from "next-auth/react";
+import { todos as todosUrl } from "@/lib/urls";
 
 export async function getRecentTodos(authorId: string) {
   return await prisma.todo.findMany({ where: { authorId }});
@@ -66,8 +66,8 @@ export async function formCreateTodo(prevState: TodoState, formData: FormData): 
     return sendBack;
   }
 
-  revalidatePath("/");
-  redirect("/");
+  revalidatePath(todosUrl({}));
+  redirect(todosUrl({}));
 }
 
 export async function formEditTodo(
@@ -110,8 +110,8 @@ export async function formEditTodo(
     return sendBack;
   }
 
-  revalidatePath("/");
-  redirect("/");
+  revalidatePath(todosUrl({}));
+  redirect(todosUrl({}));
 }
 
 export async function deleteTodo(id: string) {
@@ -121,6 +121,6 @@ export async function deleteTodo(id: string) {
     return { message: "not found" };
   }
   
-  revalidatePath("/");
-  redirect("/");
+  revalidatePath(todosUrl({}));
+  redirect(todosUrl({}));
 }

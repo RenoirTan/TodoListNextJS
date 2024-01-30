@@ -18,11 +18,16 @@ export function objectToQuery(object: { [key: string]: string | number }): URLSe
   return usp;
 }
 
+export function appendQueryToPath(path: string, query: URLSearchParams): string {
+  const qstring = query.toString();
+  return (qstring) ? path + "?" + qstring : path;
+}
+
 export const index = () => "/";
 
 export const todos = (obj: { page?: number; query?: string; }) => {
   const urlQuery = objectToQuery(obj);
-  return "/?" + urlQuery.toString();
+  return appendQueryToPath("/", urlQuery);
 };
 
 export const login = () => "/login";

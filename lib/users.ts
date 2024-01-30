@@ -10,7 +10,7 @@ import {
   createUserCredentialsValidator,
   signIn
 } from "@/auth";
-// import { signIn } from "next-auth/react";
+import { todos as todosUrl, login as loginUrl } from "@/lib/urls";
 
 export async function getUser(id: string) {
   const user = await prisma.user.findUnique({ where: { id } });
@@ -85,7 +85,7 @@ export async function formCreateUser(prevState: CreateUserState, formData: FormD
     return sendBack;
   }
 
-  redirect("/");
+  redirect(loginUrl());
 }
 
 export type ChangePasswordState = {
@@ -151,7 +151,7 @@ export async function formChangePassword(prevState: ChangePasswordState, formDat
     }
   }
 
-  redirect("/");
+  redirect(todosUrl({}));
 }
 
 export async function changeName(id: string, name: string | null) {
@@ -175,7 +175,7 @@ export async function formChangeName(prevState: string | null, formData: FormDat
     return "Something went wrong."
   }
 
-  redirect("/");
+  redirect(todosUrl({}));
 }
  
 export async function hashPassword(password: string) {
