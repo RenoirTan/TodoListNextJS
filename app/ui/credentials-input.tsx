@@ -1,4 +1,5 @@
 import { Input } from "@nextui-org/react";
+import React from "react";
 
 export default function CredentialsInput({
   type,
@@ -8,7 +9,8 @@ export default function CredentialsInput({
   isRequired,
   isDisabled,
   isReadOnly,
-  defaultValue
+  defaultValue,
+  endContent
 }: {
   type?: string;
   label?: string;
@@ -17,7 +19,8 @@ export default function CredentialsInput({
   isRequired?: boolean;
   isDisabled?: boolean;
   isReadOnly?: boolean;
-  defaultValue?: string
+  defaultValue?: string;
+  endContent?: React.ReactNode;
 }) {
   return <Input
     className="mb-3"
@@ -30,5 +33,6 @@ export default function CredentialsInput({
     isDisabled={isDisabled}
     isReadOnly={isReadOnly}
     defaultValue={defaultValue}
+    endContent={endContent}
   />;
 }
