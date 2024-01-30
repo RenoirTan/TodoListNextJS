@@ -33,6 +33,17 @@ const config: Config = {
       "calm-black": "#180f18",
       "calm-gray": "#24242e",
       "centrist": "#7f7f7f"
+    },
+    extend: {
+      animation: {
+        "subtle-pulse": "subtle-pulse 4s cubic-bezier(0.4, 0, 0.6, 1) infinite"
+      },
+      keyframes: {
+        "subtle-pulse": {
+          "0%, 100%": { opacity: "1" },
+          "50%": { opacity: ".85" }
+        }
+      },
     }
   },
   darkMode: "class",

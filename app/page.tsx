@@ -12,7 +12,12 @@ export default async function Home() {
         </div>
         <div className="flex justify-center">
           <Link href={registerUrl()}>
-            <Button radius="full" className="bg-gradient-to-tr from-violet to-cyan">Register</Button>
+            <Button
+              radius="full"
+              className="animate-subtle-pulse bg-gradient-to-tr from-violet to-cyan p-6"
+            >
+              <p className="text-center text-xl font-bold text-white">Register</p>
+            </Button>
           </Link>
         </div>
       </div>
