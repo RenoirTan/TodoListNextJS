@@ -27,7 +27,7 @@ export const index = () => "/";
 
 export const todos = (obj: { page?: number; query?: string; }) => {
   const urlQuery = objectToQuery(obj);
-  return appendQueryToPath("/", urlQuery);
+  return appendQueryToPath("/todos", urlQuery);
 };
 
 export const login = () => "/login";
