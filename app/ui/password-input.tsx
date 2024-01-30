@@ -1,6 +1,7 @@
 import { useState } from "react";
 import CredentialsInput from "./credentials-input";
 import { Button } from "@nextui-org/react";
+import { EyeIcon, EyeSlashIcon } from "@heroicons/react/16/solid";
 
 export default function PasswordInput({
   label,
@@ -39,11 +40,11 @@ export function PasswordVisibilityToggle({
   setPlaintext: (plaintext: boolean) => void;
 }) {
   return (
-    <Button className="focus-outline:none" type="button" onClick={() => setPlaintext(!plaintext)}>
+    <Button type="button" size="sm" variant="light" onClick={() => setPlaintext(!plaintext)}>
       {plaintext ? (
-        <p>O</p>
+        <EyeSlashIcon className="text-sm text-default-400 pointer-events-none" />
       ) : (
-        <p>Ouch</p>
+        <EyeIcon className="text-sm text-default-400 pointer-events-none" />
       )}
     </Button>
   );
