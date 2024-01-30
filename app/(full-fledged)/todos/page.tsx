@@ -20,7 +20,7 @@ export default async function Page() {
   const user = await getUser(id);
 
   return (
-    <main className="flex min-h-screen flex-col items-center p-24">
+    <div className="flex min-h-screen flex-col items-center p-24">
       <p>Hello, {user?.name}</p>
       <LogoutButton />
       <Link href={changePasswordUrl()}>Change Password</Link>
@@ -29,6 +29,6 @@ export default async function Page() {
       <Suspense fallback={<TodosSkeleton />}>
         <TodosList page={1} query={""} authorId={session?.user?.id || ""} />
       </Suspense>
-    </main>
+    </div>
   );
 }
