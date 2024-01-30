@@ -1,7 +1,12 @@
 "use client";
 
 import { formCreateUser } from "@/lib/users";
-import { useFormState } from "react-dom";
+import { useFormState, useFormStatus } from "react-dom";
+import CredentialsForm from "./credentials-form";
+import CredentialsFormTitle from "./credentials-form-title";
+import EmailInput from "./email-input";
+import PasswordInput from "./password-input";
+import SubmitButton from "./submit-button";
 
 export default async function RegisterForm() {
   const initialState = { message: "", errors: {} };
@@ -10,22 +15,25 @@ export default async function RegisterForm() {
   return (
     <div>
       <form action={dispatch}>
-        <h1>Register a new account</h1>
-        <div>
-          <label htmlFor="email">Email</label>
-          <input type="text" id="email" name="email" placeholder="Email" />
-        </div>
-        <div>
-          <label htmlFor="password">Password</label>
-          <input type="password" id="password" name="password" placeholder="Password" />
-        </div>
-        <div>
-          <label htmlFor="confirm-password">Confirm Password</label>
-          <input type="password" id="password" name="confirm-password" placeholder="Confirm Password" />
-        </div>
-        <button type="submit">Create New Account</button>
+        <CredentialsForm>
+          <CredentialsFormTitle title="Register" />
+          <EmailInput />
+          <PasswordInput label="Password" name="password" placeholder="Enter Password" />
+          <PasswordInput label="Confirm Password" name="confirm-password" placeholder="Confirm Password" />
+          <RegisterButton />
+          {state?.message && <p>{state.message}</p>}
+        </CredentialsForm>
       </form>
-      {state?.message && <p>{state.message}</p>}
     </div>
+  );
+}
+
+export function RegisterButton() {
+  const { pending } = useFormStatus();
+
+  return (
+    <SubmitButton>
+      Create New Account
+    </SubmitButton>
   );
 }
