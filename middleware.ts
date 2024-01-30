@@ -11,7 +11,8 @@ export const config = {
   //  - /register
   //  - /_next/static/...
   //  - /_next/image/...
-  //  - /favicon.ico/...
+  //  - /favicon.ico
   //  - /{...}.png
-  matcher: ["/((?!api|register|_next/static|_next/image|favicon\\.ico|.*\\.png$).*){1}"],
+  // equivalent to `/^\/((?!api|register$|_next\/static|_next\/image|favicon\.ico$|.*\.png$).+)/g`
+  matcher: ["/((?!api|register$|_next/static|_next/image|favicon\\.ico$|.*\\.png$).+)"],
 };
