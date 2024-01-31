@@ -40,12 +40,12 @@ export function PasswordVisibilityToggle({
   setPlaintext: (plaintext: boolean) => void;
 }) {
   return (
-    <Button type="button" size="sm" variant="light" onClick={() => setPlaintext(!plaintext)}>
+    <button className="focus:outline-none" type="button" onClick={() => setPlaintext(!plaintext)}>
       {plaintext ? (
-        <EyeSlashIcon className="text-sm text-default-400 pointer-events-none" />
+        <EyeSlashIcon className="text-sm text-default-400 pointer-events-none h-[1.5em] w-[1.5em]" />
       ) : (
-        <EyeIcon className="text-sm text-default-400 pointer-events-none" />
+        <EyeIcon className="text-sm text-default-400 pointer-events-none h-[1.5em] w-[1.5em]" />
       )}
-    </Button>
+    </button>
   );
 }
