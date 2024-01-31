@@ -24,9 +24,15 @@ import { useState } from "react";
 
 export default function Navbar({ loggedIn }: { loggedIn?: boolean }) {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const closeMenu = () => setIsMenuOpen(false);
 
   return (
-    <NavbarInner className="w-full z-30" isBordered>
+    <NavbarInner
+      className="w-full z-30"
+      isBordered
+      isMenuOpen={isMenuOpen}
+      onMenuOpenChange={setIsMenuOpen}
+    >
       <NavbarContent justify="start">
         <NavbarBrand>
           <Link href={indexUrl()} className="flex flex-row items-center gap-x-2">
@@ -70,17 +76,17 @@ export default function Navbar({ loggedIn }: { loggedIn?: boolean }) {
       <NavbarMenu>
         {loggedIn ? (<>
           <NavbarMenuItem>
-            <TodosItem />
+            <TodosItem closeMenu={closeMenu} />
           </NavbarMenuItem>
           <NavbarMenuItem>
-            <LogoutItem />
+            <LogoutItem  />
           </NavbarMenuItem>
           <NavbarMenuItem>
-            <SettingsItem />
+            <SettingsItem closeMenu={closeMenu} />
           </NavbarMenuItem>
         </>) : (<>
           <NavbarMenuItem>
-            <LoginItem />
+            <LoginItem closeMenu={closeMenu} />
           </NavbarMenuItem>
         </>)}
       </NavbarMenu>
@@ -88,17 +94,17 @@ export default function Navbar({ loggedIn }: { loggedIn?: boolean }) {
   );
 }
 
-function LoginItem() {
-  return <Link href={loginUrl()}>Login</Link>;
+function LoginItem({ closeMenu }: { closeMenu?: () => void }) {
+  return <Link href={loginUrl()} onClick={closeMenu}>Login</Link>;
 }
 
 function LogoutItem() {
   return <LogoutButton />
 }
 
-function RegisterItem() {
+function RegisterItem({ closeMenu }: { closeMenu?: () => void }) {
   return (
-    <Link href={registerUrl()}>
+    <Link href={registerUrl()} onClick={closeMenu}>
       <Button className="rounded-full bg-gradient-to-tr from-blue-violet to-cyan">
         <p className="font-semibold">Register</p>
       </Button>
@@ -106,10 +112,10 @@ function RegisterItem() {
   );
 }
 
-function TodosItem() {
-  return <Link href={todosUrl({})}>Todos</Link>
+function TodosItem({ closeMenu }: { closeMenu?: () => void }) {
+  return <Link href={todosUrl({})} onClick={closeMenu}>Todos</Link>
 }
 
-function SettingsItem() {
-  return <Link href={settingsUrl()}>Settings</Link>
+function SettingsItem({ closeMenu }: { closeMenu?: () => void }) {
+  return <Link href={settingsUrl()} onClick={closeMenu}>Settings</Link>
 }
