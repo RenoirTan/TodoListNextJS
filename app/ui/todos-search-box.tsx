@@ -6,6 +6,7 @@ import {
 import { Input } from "@nextui-org/react";
 import { MagnifyingGlassIcon } from "@heroicons/react/16/solid";
 import { useRouter, useSearchParams } from "next/navigation";
+import { useDebouncedCallback } from "use-debounce";
 
 // https://nextjs.org/learn/dashboard-app/adding-search-and-pagination
 export default function TodosSearchBox() {
@@ -20,6 +21,8 @@ export default function TodosSearchBox() {
     }
   }
 
+  const debouncedHandleSearch = useDebouncedCallback(handleSearch, 300);
+
   return (
     <div className="w-full">
       <Input
@@ -29,7 +32,7 @@ export default function TodosSearchBox() {
         placeholder="Search"
         defaultValue={searchParams?.get("query") || undefined}
         onChange={(event) => {
-          handleSearch(event.target.value);
+          debouncedHandleSearch(event.target.value);
         }}
         startContent={<MagnifyingGlassIcon className="h-[24px] w-[24px] ms-1 me-3" />}
         aria-label="Search Todo Items"
