@@ -24,52 +24,50 @@ export default function Navbar() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
 
   return (
-    <div className="w-full z-30">
-      <NavbarInner isBordered>
-        <NavbarContent justify="start">
-          <NavbarBrand>
-            <Link href={indexUrl()}>
-              <BrandMini />
-            </Link>
-          </NavbarBrand>
+    <NavbarInner className="w-full z-30" isBordered>
+      <NavbarContent justify="start">
+        <NavbarBrand>
+          <Link href={indexUrl()}>
+            <BrandMini />
+          </Link>
+        </NavbarBrand>
 
-          <NavbarMenuToggle
-            aria-label={isMenuOpen ? "Close Menu" : "Open Menu"}
-            className="md:hidden"
-          />
-        </NavbarContent>
+        <NavbarMenuToggle
+          aria-label={isMenuOpen ? "Close Menu" : "Open Menu"}
+          className="md:hidden"
+        />
+      </NavbarContent>
 
-        <NavbarContent className="hidden md:flex md:flex-grow md:flex-row justify-end gap-4" justify="end">
-          <NavbarItem>
-            <TodosItem />
-          </NavbarItem>
-          <NavbarItem>
-            <LoginItem />
-          </NavbarItem>
-          <NavbarItem>
-            <LogoutItem />
-          </NavbarItem>
-          <NavbarItem>
-            <SettingsItem />
-          </NavbarItem>
-        </NavbarContent>
+      <NavbarContent className="hidden md:flex md:flex-grow md:flex-row justify-end gap-4" justify="end">
+        <NavbarItem>
+          <TodosItem />
+        </NavbarItem>
+        <NavbarItem>
+          <LoginItem />
+        </NavbarItem>
+        <NavbarItem>
+          <LogoutItem />
+        </NavbarItem>
+        <NavbarItem>
+          <SettingsItem />
+        </NavbarItem>
+      </NavbarContent>
 
-        <NavbarMenu>
-          <NavbarMenuItem>
-            <TodosItem />
-          </NavbarMenuItem>
-          <NavbarMenuItem>
-            <LoginItem />
-          </NavbarMenuItem>
-          <NavbarMenuItem>
-            <LogoutItem />
-          </NavbarMenuItem>
-          <NavbarMenuItem>
-            <SettingsItem />
-          </NavbarMenuItem>
-        </NavbarMenu>
-      </NavbarInner>
-    </div>
+      <NavbarMenu>
+        <NavbarMenuItem>
+          <TodosItem />
+        </NavbarMenuItem>
+        <NavbarMenuItem>
+          <LoginItem />
+        </NavbarMenuItem>
+        <NavbarMenuItem>
+          <LogoutItem />
+        </NavbarMenuItem>
+        <NavbarMenuItem>
+          <SettingsItem />
+        </NavbarMenuItem>
+      </NavbarMenu>
+    </NavbarInner>
   );
 }
 
