@@ -19,7 +19,7 @@ export default function Navbar() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
 
   return (
-    <div className="fixed top-0 w-screen">
+    <div className="w-full z-30">
       <NavbarInner isBordered>
         <NavbarContent justify="start">
           <NavbarBrand>

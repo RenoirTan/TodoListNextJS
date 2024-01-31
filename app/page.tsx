@@ -5,9 +5,9 @@ import Navbar from "@/app/ui/navbar";
 
 export default async function Home() {
   return (
-    <main>
+    <main className="h-screen flex flex-col">
       <Navbar />
-      <div className="flex place-content-center h-screen">
+      <div className="flex place-content-center h-full">
         <div className="mx-auto flex flex-col justify-center">
           <div className="mb-6">
             <h1 className="text-center text-5xl font-extrabold tracking-wide mb-3">Todos</h1>
