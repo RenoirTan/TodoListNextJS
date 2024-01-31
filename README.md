@@ -1,50 +1,104 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# Todos
+*or TodoListNextJS*
 
-## Getting Started
+![Screenshot on Desktop](/public/desktop.png)
 
-First, run the development server:
+I finally decided to learn some front-end stuff and picked Next.js because I heard it has great market share. :)
+
+## Description
+
+Todos is a note-taking app that allows you to keep track of what you need to do with a simple and elegant UI. Jot down important items and events and you will never forget them again.
+
+## Current Features
+
+ - Create, edit and delete todo items
+ - Login, logout, register, change password and change username
+ - Authentication using NextAuth's `CredentialsProvider`
+ - Search bar
+ - Pagination
+
+## Technologies Used
+
+ - [React](https://react.dev)
+ - [Next.js](https://nextjs.org)
+ - [NextAuth.js](https://next-auth.js.org)
+ - [NextUI](https://nextui.org)
+ - [Tailwind CSS](https://tailwindcss.com)
+
+## Potential Feature Additions
+
+ - Light Mode
+ - OAuth2 (starting with GitHub)
+ - Search filters
+ - Reminder system (deadlines, email notifications, etc...)
+
+## System Dependencies
+
+ - Linux (WSL and MacOS probably work idk)
+ - Docker
+ - `node.js` (version 20 or above)
+ - `npm`
+ - `npx`
+
+## Helpful Shell Commands
+
+### Setup
+
+Your computer probably doesn't have a seeded database up and running for Todos. In that case, run the following commands to setup `prisma` and `postgres`.
 
 ```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+# Start postgres database
+docker compose up -d postgres
+
+# Create tables
+npx prisma db push
+
+# Optionally, seed database with initial values
+npx tsx ./prisma/seeduser.ts
+npx tsx ./prisma/seedtodo.ts
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+### Development
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
-
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
-
-## Learn More
-
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
-
-## Pain and Suffering
+To start a development environment entirely in docker:
 
 ```bash
-# Run 
-docker compose up -d
+docker compose up dev postgres
+# OR
+docker compose up -d dev postgres # to detach terminal from docker
+```
 
-# You must do this before doing anything else, including seeding!
-npx prisma migrate dev --name init
+Alternatively, you may want to try out a hybrid development environment:
 
-# Optionally seed the database
-npx tsx prisma/seeduser.ts
-npx tsx prisma/seedtodo.ts
+```bash
+# /dev/pts/1
+docker compose up postgres
+
+# New terminal
+# /dev/pts/2
+npm run dev
+```
+
+### Production
+
+Once the website is deemed ready for use, run these commands:
+
+```bash
+docker compose up prod postgres
+# OR
+docker compose up -d prod postgres
+```
+
+### Troubleshooting
+
+Occassionally, Intellisense may break and there might be graphical glitches in the website. But don't worry! I've found that *resetting* the website completely will get rid of these annoying problems.
+
+```bash
+# Stop the website!
+docker compose down # or press Ctrl+C
+
+# "Reset"
+rm -r .next
+rm -r node_modules
+npm install
 ```
