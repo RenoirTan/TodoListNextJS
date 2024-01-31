@@ -44,9 +44,9 @@ export default function TodoCard({ todo }: { todo: Todo }) {
           <Divider />
           <CardFooter className="justify-between">
             <Link href={editTodoUrl({ id: todo.id })}>
-              <Button>
-                <p>Edit</p>
-              </Button>
+              <div className="flex flex-row gap-x-2 items-center">
+                <p className="underline">Edit</p>
+              </div>
             </Link>
             <Expander expanded={expanded} setExpanded={setExpanded} />
           </CardFooter>
@@ -64,7 +64,7 @@ export function Expander({
   setExpanded: (expanded: boolean) => void
 }) {
   return (
-    <Button type="button" onClick={() => setExpanded(!expanded)}>
+    <div onClick={() => setExpanded(!expanded)} className="flex flex-row gap-x-2 items-center">
       {(expanded) ? (
         <>
           <p>Collapse</p>
@@ -76,6 +76,6 @@ export function Expander({
           <ChevronDownIcon className="h-[20px] w-[20px]" />
         </>
       )}
-    </Button>
+    </div>
   );
 }
