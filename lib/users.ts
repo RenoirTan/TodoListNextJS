@@ -8,9 +8,10 @@ import {
   auth,
   changePasswordCredentialsValidator,
   createUserCredentialsValidator,
-  signIn
+  signIn,
+  signOut
 } from "@/auth";
-import { todos as todosUrl, login as loginUrl } from "@/lib/urls";
+import { todos as todosUrl, login as loginUrl, index as indexUrl } from "@/lib/urls";
 
 export async function getUser(id: string) {
   const user = await prisma.user.findUnique({ where: { id } });
@@ -39,6 +40,10 @@ export async function authenticate(prevState: string | undefined, formData: Form
     }
     throw err;
   }
+}
+
+export async function goodbye() {
+  await signOut({ redirect: true, redirectTo: indexUrl() });
 }
 
 export async function createUser(email: string, password: string) {

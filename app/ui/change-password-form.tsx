@@ -2,6 +2,10 @@
 
 import { formChangePassword } from "@/lib/users";
 import { useFormState } from "react-dom";
+import CredentialsForm from "./credentials-form";
+import CredentialsFormTitle from "./credentials-form-title";
+import PasswordInput from "./password-input";
+import SubmitButton from "./submit-button";
 
 export default async function ChangePasswordForm() {
   const initialState = { message: "", errors: {} };
@@ -10,22 +14,35 @@ export default async function ChangePasswordForm() {
   return (
     <div>
       <form action={dispatch}>
-        <h1>Change Password</h1>
-        <div>
-          <label htmlFor="old-password">Original Password</label>
-          <input type="password" id="old-password" name="old-password" placeholder="Original Password" />
-        </div>
-        <div>
-          <label htmlFor="password">New Password</label>
-          <input type="password" id="password" name="password" placeholder="Password" />
-        </div>
-        <div>
-          <label htmlFor="confirm-password">Confirm Password</label>
-          <input type="password" id="password" name="confirm-password" placeholder="Confirm Password" />
-        </div>
-        <button type="submit">Change Password</button>
+        <CredentialsForm>
+          <CredentialsFormTitle title="Change Password" />
+          <PasswordInput
+            label="Original Password"
+            name="old-password"
+            placeholder="Original Password"
+          />
+          <PasswordInput
+            label="New Password"
+            name="password"
+            placeholder="New Password"
+          />
+          <PasswordInput
+            label="Confirm New Password"
+            name="confirm-password"
+            placeholder="Confirm New Password"
+          />
+          <ChangePasswordButton />
+          {state?.message && <p>{state.message}</p>}
+        </CredentialsForm>
       </form>
-      {state?.message && <p>{state.message}</p>}
     </div>
+  );
+}
+
+export function ChangePasswordButton() {
+  return (
+    <SubmitButton>
+      Change Password
+    </SubmitButton>
   );
 }

@@ -10,8 +10,8 @@ export default async function Page() {
   }
 
   return (
-    <main>
+    <div className="w-screen flex justify-center">
       <ChangeNameForm userId={userId} />
-    </main>
+    </div>
   );
 }
