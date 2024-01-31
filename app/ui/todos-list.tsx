@@ -7,18 +7,19 @@ export default async function TodosList({
   query,
   authorId
 }: {
-  page?: number;
+  page?: string;
   query?: string;
   authorId: string;
 }) {
-  const todos = await getRecentTodos(authorId, page, query);
+  const pageNumber = (page) ? parseInt(page) : 1;
+  const todos = await getRecentTodos(authorId, pageNumber, query);
   const totalTodos = await countTodos(authorId, query);
   const totalPages = await todosTotalPages(totalTodos);
 
   return (
     <div className="flex flex-col items-center gap-y-8 w-full">
       <TodosListInner todos={todos} />
-      <TodosPaginator total={totalPages} current={page || 1} />
+      <TodosPaginator total={totalPages} current={pageNumber} />
     </div>
   );
 }

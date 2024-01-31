@@ -13,7 +13,7 @@ import TodosSearchBox from "@/app/ui/todos-search-box";
 export default async function Page({
   searchParams
 }: {
-  searchParams: { page?: number; query?: string; }
+  searchParams: { page?: string; query?: string; }
 }) {
   const session = await auth();
   const id = session?.user?.id;
