@@ -8,17 +8,21 @@ import { auth } from "@/auth";
 import { todos as todosUrl } from "@/lib/urls";
 
 export async function getRecentTodos(authorId: string, page?: number, query?: string) {
-  const trimmed = query?.trim();
+  const TODOS_PER_PAGE = 10;
+  const skips = (page) ? (page - 1) : 0;
+  const trimmed = (query) ? query.trim() : "";
 
   return await prisma.todo.findMany({
     where: {
       authorId,
-      OR: (trimmed) ? [
+      OR: [
         { title: { contains: trimmed, mode: "insensitive" } },
         { description: { contains: trimmed, mode: "insensitive" } }
-      ] : []
+      ]
     },
-    orderBy: [{ updatedAt: "desc" }]
+    orderBy: [{ updatedAt: "desc" }],
+    skip: TODOS_PER_PAGE * skips,
+    take: TODOS_PER_PAGE
   });
 }
 
