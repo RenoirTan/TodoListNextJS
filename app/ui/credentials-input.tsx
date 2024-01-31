@@ -25,7 +25,7 @@ export default function CredentialsInput({
   return <Input
     className="mb-3"
     type={type}
-    variant="faded"
+    variant="flat"
     label={label}
     placeholder={placeholder}
     name={name}
