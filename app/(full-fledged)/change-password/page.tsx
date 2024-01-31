@@ -1,4 +1,4 @@
-import ChangePasswordForm from "../ui/change-password-form";
+import ChangePasswordForm from "@/app/ui/change-password-form";
 
 export default async function Page() {
   return (
