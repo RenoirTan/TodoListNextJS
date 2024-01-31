@@ -7,8 +7,19 @@ import { Todo } from "@prisma/client";
 import { auth } from "@/auth";
 import { todos as todosUrl } from "@/lib/urls";
 
-export async function getRecentTodos(authorId: string) {
-  return await prisma.todo.findMany({ where: { authorId }});
+export async function getRecentTodos(authorId: string, page?: number, query?: string) {
+  const trimmed = query?.trim();
+
+  return await prisma.todo.findMany({
+    where: {
+      authorId,
+      OR: (trimmed) ? [
+        { title: { contains: trimmed, mode: "insensitive" } },
+        { description: { contains: trimmed, mode: "insensitive" } }
+      ] : []
+    },
+    orderBy: [{ updatedAt: "desc" }]
+  });
 }
 
 export async function getTodo(id: string, authorId: string): Promise<Todo | null> {

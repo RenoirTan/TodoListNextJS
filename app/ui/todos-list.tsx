@@ -6,11 +6,11 @@ export default async function TodosList({
   query,
   authorId
 }: {
-  page: number;
-  query: string;
+  page?: number;
+  query?: string;
   authorId: string;
 }) {
-  const todos = await getRecentTodos(authorId);
+  const todos = await getRecentTodos(authorId, page, query);
 
   return <TodosListInner todos={todos} />;
 }

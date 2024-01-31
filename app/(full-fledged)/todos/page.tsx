@@ -11,7 +11,11 @@ import {
 import { Button, Input } from "@nextui-org/react";
 import { DocumentPlusIcon, MagnifyingGlassIcon } from "@heroicons/react/16/solid";
 
-export default async function Page() {
+export default async function Page({
+  searchParams
+}: {
+  searchParams: { page?: number; query?: string; }
+}) {
   const session = await auth();
   const id = session?.user?.id;
   if (!id) notFound();
@@ -56,7 +60,11 @@ export default async function Page() {
         </div>
         <div className="w-full md:w-4/5">
           <Suspense fallback={<TodosSkeleton />}>
-            <TodosList page={1} query={""} authorId={session?.user?.id || ""} />
+            <TodosList
+              page={searchParams.page}
+              query={searchParams.query}
+              authorId={session?.user?.id || ""}
+            />
           </Suspense>
         </div>
       </div>
