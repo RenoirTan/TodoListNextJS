@@ -22,6 +22,7 @@
     "next-auth": "^5.0.0-beta.5",
     "react": "^18",
     "react-dom": "^18",
+    "sharp": "^0.33.2",
     "ts-node": "^10.9.2",
     "use-debounce": "^10.0.0",
     "zod": "^3.22.4"
