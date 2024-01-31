@@ -57,10 +57,10 @@ export default function Navbar({ loggedIn }: { loggedIn?: boolean }) {
             <TodosItem />
           </NavbarItem>
           <NavbarItem>
-            <LogoutItem />
+            <SettingsItem />
           </NavbarItem>
           <NavbarItem>
-            <SettingsItem />
+            <LogoutItem />
           </NavbarItem>
         </>) : (<>
           <NavbarItem>
@@ -79,10 +79,10 @@ export default function Navbar({ loggedIn }: { loggedIn?: boolean }) {
             <TodosItem closeMenu={closeMenu} />
           </NavbarMenuItem>
           <NavbarMenuItem>
-            <LogoutItem  />
+            <SettingsItem closeMenu={closeMenu} />
           </NavbarMenuItem>
           <NavbarMenuItem>
-            <SettingsItem closeMenu={closeMenu} />
+            <LogoutItem  />
           </NavbarMenuItem>
         </>) : (<>
           <NavbarMenuItem>
