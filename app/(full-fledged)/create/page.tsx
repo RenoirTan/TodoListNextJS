@@ -1,4 +1,9 @@
 import CreateForm from "@/app/ui/create-form";
+import { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: "Create Todo Item"
+};
 
 export default async function Page() {
   return (

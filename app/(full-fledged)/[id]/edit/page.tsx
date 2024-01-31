@@ -1,8 +1,13 @@
 import EditForm from "@/app/ui/edit-form";
 import EditFormSkeleton from "@/app/ui/skeletons/edit-form-skeleton";
 import { auth } from "@/auth";
+import { Metadata } from "next";
 import { signIn } from "next-auth/react";
 import { Suspense } from "react";
+
+export const metadata: Metadata = {
+  title: "Edit Todo Item"
+};
 
 export default async function Page({ params }: { params: { id: string } }) {
   const session = await auth();

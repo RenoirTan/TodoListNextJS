@@ -4,6 +4,11 @@ import {
   changePassword as changePasswordUrl
 } from "@/lib/urls";
 import { LockClosedIcon, TagIcon } from "@heroicons/react/16/solid";
+import { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: "Settings"
+};
 
 export default function Page() {
   return (

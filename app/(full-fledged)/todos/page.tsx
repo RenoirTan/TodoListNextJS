@@ -1,15 +1,16 @@
-import Link from "next/link";
-import { Suspense, useState } from "react";
+import { Suspense } from "react";
 import TodosSkeleton from "@/app/ui/skeletons/todos-skeleton";
 import TodosList from "@/app/ui/todos-list";
 import { auth } from "@/auth";
 import { getUser } from "@/lib/users";
 import { notFound } from "next/navigation";
-import { createTodo as createTodoUrl } from "@/lib/urls";
-import { Button } from "@nextui-org/react";
-import { DocumentPlusIcon } from "@heroicons/react/16/solid";
 import TodosSearchBox from "@/app/ui/todos-search-box";
 import CreateButton from "@/app/ui/create-button";
+import { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: "Todo List"
+};
 
 export default async function Page({
   searchParams
