@@ -14,11 +14,7 @@ export default function TodosSearchBox() {
   const { replace } = useRouter();
 
   function handleSearch(queryString?: string) {
-    if (queryString) {
-      replace(todosUrl({ query: queryString }));
-    } else {
-      replace(todosUrl({}));
-    }
+    replace(todosUrl({ query: queryString }));
   }
 
   const debouncedHandleSearch = useDebouncedCallback(handleSearch, 300);
