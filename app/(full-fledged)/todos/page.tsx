@@ -9,6 +9,7 @@ import { createTodo as createTodoUrl } from "@/lib/urls";
 import { Button } from "@nextui-org/react";
 import { DocumentPlusIcon } from "@heroicons/react/16/solid";
 import TodosSearchBox from "@/app/ui/todos-search-box";
+import CreateButton from "@/app/ui/create-button";
 
 export default async function Page({
   searchParams
@@ -36,14 +37,7 @@ export default async function Page({
         {/* SEARCH AND CREATE */}
         <div className="w-full flex flex-col md:flex-row gap-4 items-center">
           <TodosSearchBox />
-          <Link href={createTodoUrl()}>
-            <Button type="button" className="h-full bg-gradient-to-tr from-mint-green to-cyan text-dark-gray py-4">
-              <div className="flex flex-row gap-2 items-center h-full">
-                <DocumentPlusIcon className="h-[18px] w-[18px]" />
-                <p className="block text-lg">Create</p>
-              </div>
-            </Button>
-          </Link>
+          <CreateButton />
         </div>
 
         {/* Todo List and Paginator */}
