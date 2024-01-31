@@ -7,12 +7,7 @@ import {
   Skeleton,
   Spinner
 } from "@nextui-org/react";
-
-const COLOR_CHOICES = ["primary", "secondary", "success", "warning", "danger"];
-
-function chooseColor() {
-  return COLOR_CHOICES[Math.min(Math.floor(Math.random() * 5), 4)];
-}
+import { chooseColor } from "@/lib/utils";
 
 export default function TodoCardSkeleton() {
   const color = chooseColor();
