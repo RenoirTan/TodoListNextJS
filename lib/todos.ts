@@ -72,7 +72,7 @@ export async function formCreateTodo(prevState: TodoState, formData: FormData): 
   const validated = TodoCreateInput.safeParse({
     title: formData.get("title")?.toString(),
     description: formData.get("description")?.toString(),
-    complete: typeof formData.get("complete") === "string" // console.log(formData) to see why
+    complete: formData.get("complete")
   });
 
   if (!validated.success) {
@@ -120,7 +120,7 @@ export async function formEditTodo(
   const validated = TodoCreateInput.safeParse({
     title: formData.get("title")?.toString(),
     description: formData.get("description")?.toString(),
-    complete: typeof formData.get("complete") === "string" // console.log(formData) to see why
+    complete: formData.get("complete")
   });
 
   if (!validated.success) {

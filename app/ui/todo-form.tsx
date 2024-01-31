@@ -14,9 +14,16 @@ export default function TodoForm({
 }) {
   const deleteTodoById = (todo) ? deleteTodo.bind(null, todo.id) : undefined;
 
+  function dispatchWithPreprocessing(formData: FormData) {
+    // for Checkbox '' is on and undefined is off
+    const complete = typeof formData.get("complete") === "string";
+    formData.set("complete", (complete) ? "on" : "");
+    dispatch(formData);
+  }
+
   return (
     <div className="flex flex-col items-center gap-y-5 w-full">
-      <form action={dispatch} className="flex flex-col items-center gap-y-5 w-full">
+      <form action={dispatchWithPreprocessing} className="flex flex-col items-center gap-y-5 w-full">
         <div className="flex flex-col gap-y-2 w-full">
           <label htmlFor="title" className="text-xl font-semibold">Title</label>
           <Input
