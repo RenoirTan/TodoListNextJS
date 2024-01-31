@@ -41,3 +41,5 @@ export const changeName = () => "/change-name";
 export const createTodo = () => "/create";
 
 export const editTodo = ({ id }: { id: string }) => `/${id}/edit`;
+
+export const settings = () => "/settings";

@@ -11,7 +11,12 @@ import {
 } from "@nextui-org/react";
 import BrandMini from "./brand-mini";
 import Link from "next/link";
-import { index as indexUrl, login as loginUrl, todos as todosUrl } from "@/lib/urls";
+import {
+  index as indexUrl,
+  login as loginUrl,
+  settings as settingsUrl,
+  todos as todosUrl
+} from "@/lib/urls";
 import LogoutButton from "@/app/ui/logout-button";
 import { useState } from "react";
 
@@ -44,6 +49,9 @@ export default function Navbar() {
           <NavbarItem>
             <LogoutItem />
           </NavbarItem>
+          <NavbarItem>
+            <SettingsItem />
+          </NavbarItem>
         </NavbarContent>
 
         <NavbarMenu>
@@ -55,6 +63,9 @@ export default function Navbar() {
           </NavbarMenuItem>
           <NavbarMenuItem>
             <LogoutItem />
+          </NavbarMenuItem>
+          <NavbarMenuItem>
+            <SettingsItem />
           </NavbarMenuItem>
         </NavbarMenu>
       </NavbarInner>
@@ -72,4 +83,8 @@ function LogoutItem() {
 
 function TodosItem() {
   return <Link href={todosUrl({})}>Todos</Link>
+}
+
+function SettingsItem() {
+  return <Link href={settingsUrl()}>Settings</Link>
 }
