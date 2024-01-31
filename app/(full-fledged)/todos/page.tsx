@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { Suspense } from "react";
+import { Suspense, useState } from "react";
 import TodosSkeleton from "@/app/ui/skeletons/todos-skeleton";
 import TodosList from "@/app/ui/todos-list";
 import { auth } from "@/auth";
@@ -36,13 +36,18 @@ export default async function Page({
         */}
         <div className="w-full flex flex-col md:flex-row gap-4 items-stretch">
           <Input
+            id="query"
             type="text"
             variant="flat"
             placeholder="Search"
+            defaultValue={searchParams.query}
             aria-label="Search Todo Items"
           />
           <div className="flex flex-row gap-4 justify-center">
-            <Button type="button" className="h-full bg-gradient-to-tr from-mint-green to-cyan text-dark-gray py-4">
+            <Button
+              type="button"
+              className="h-full bg-gradient-to-tr from-mint-green to-cyan text-dark-gray py-4"
+            >
               <div className="flex flex-row gap-2 items-center h-full">
                 <MagnifyingGlassIcon className="h-[24px] w-[24px] md:h-[18px] md:w-[18px]" />
                 <p className="hidden md:block text-lg">Search</p>
