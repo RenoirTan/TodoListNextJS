@@ -10,6 +10,7 @@ import {
 } from "@heroicons/react/16/solid";
 import { clsx } from "clsx";
 import { useState } from "react";
+import Datex from "./datex";
 
 export default function TodoCard({ todo }: { todo: Todo }) {
   const [expanded, setExpanded] = useState(false);
@@ -35,10 +36,10 @@ export default function TodoCard({ todo }: { todo: Todo }) {
                 )}
               </div>
             </div>
-            <div className="flex flex-row gap-x-2">
-              <p className="text-xs">Created on </p>
+            <div className="flex flex-row gap-x-2 text-xs opacity-70">
+              <p>Created on <Datex date={todo.createdAt}/></p>
               <Divider orientation="vertical" />
-              <p className="text-xs">Last updated on </p>
+              <p>Last updated on <Datex date={todo.updatedAt} /></p>
             </div>
           </CardHeader>
           <Divider />
