@@ -1,6 +1,7 @@
 "use client";
 
 import {
+  Button,
   Navbar as NavbarInner,
   NavbarBrand,
   NavbarContent,
@@ -14,6 +15,7 @@ import Link from "next/link";
 import {
   index as indexUrl,
   login as loginUrl,
+  register as registerUrl,
   settings as settingsUrl,
   todos as todosUrl
 } from "@/lib/urls";
@@ -31,6 +33,10 @@ export default function Navbar({ loggedIn }: { loggedIn?: boolean }) {
             <BrandMini />
           </Link>
         </NavbarBrand>
+
+        {loggedIn || <NavbarItem className="block md:hidden me-2">
+          <RegisterItem />
+        </NavbarItem>}
 
         <NavbarMenuToggle
           aria-label={isMenuOpen ? "Close Menu" : "Open Menu"}
@@ -55,6 +61,10 @@ export default function Navbar({ loggedIn }: { loggedIn?: boolean }) {
           </NavbarItem>
         </>)}
       </NavbarContent>
+
+      {loggedIn || <NavbarItem className="hidden md:block">
+        <RegisterItem />
+      </NavbarItem>}
 
       <NavbarMenu>
         {loggedIn ? (<>
@@ -83,6 +93,16 @@ function LoginItem() {
 
 function LogoutItem() {
   return <LogoutButton />
+}
+
+function RegisterItem() {
+  return (
+    <Link href={registerUrl()}>
+      <Button className="rounded-full bg-gradient-to-tr from-blue-violet to-cyan">
+        <p className="font-semibold">Register</p>
+      </Button>
+    </Link>
+  );
 }
 
 function TodosItem() {
