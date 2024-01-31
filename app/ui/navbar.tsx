@@ -21,6 +21,7 @@ import {
 } from "@/lib/urls";
 import LogoutButton from "@/app/ui/logout-button";
 import { useState } from "react";
+import { ArrowRightEndOnRectangleIcon, ClipboardDocumentIcon, Cog6ToothIcon } from "@heroicons/react/16/solid";
 
 export default function Navbar({ loggedIn }: { loggedIn?: boolean }) {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -95,7 +96,12 @@ export default function Navbar({ loggedIn }: { loggedIn?: boolean }) {
 }
 
 function LoginItem({ closeMenu }: { closeMenu?: () => void }) {
-  return <Link href={loginUrl()} onClick={closeMenu}>Login</Link>;
+  return (
+    <Link href={loginUrl()} onClick={closeMenu} className="flex flex-row items-center gap-x-5 md:gap-x-1.5">
+      <ArrowRightEndOnRectangleIcon className="h-[1em] w-[1em]" />
+      <p>Login</p>
+    </Link>
+  );
 }
 
 function LogoutItem() {
@@ -113,9 +119,19 @@ function RegisterItem({ closeMenu }: { closeMenu?: () => void }) {
 }
 
 function TodosItem({ closeMenu }: { closeMenu?: () => void }) {
-  return <Link href={todosUrl({})} onClick={closeMenu}>Todos</Link>
+  return (
+    <Link href={todosUrl({})} onClick={closeMenu} className="flex flex-row items-center gap-x-5 md:gap-x-1.5">
+      <ClipboardDocumentIcon className="h-[1em] w-[1em]" />
+      <p>Todos</p>
+    </Link>
+  );
 }
 
 function SettingsItem({ closeMenu }: { closeMenu?: () => void }) {
-  return <Link href={settingsUrl()} onClick={closeMenu}>Settings</Link>
+  return (
+    <Link href={settingsUrl()} onClick={closeMenu} className="flex flex-row items-center gap-x-5 md:gap-x-1.5">
+      <Cog6ToothIcon className="h-[1em] w-[1em]" />
+      <p>Settings</p>
+    </Link>
+  );
 }
