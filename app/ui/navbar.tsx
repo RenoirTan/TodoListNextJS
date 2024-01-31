@@ -29,8 +29,9 @@ export default function Navbar({ loggedIn }: { loggedIn?: boolean }) {
     <NavbarInner className="w-full z-30" isBordered>
       <NavbarContent justify="start">
         <NavbarBrand>
-          <Link href={indexUrl()}>
+          <Link href={indexUrl()} className="flex flex-row items-center gap-x-2">
             <BrandMini />
+            <h2 className="font-semibold text-xl bg-clip-text text-transparent bg-gradient-to-r from-violet to-vermillion">Todos</h2>
           </Link>
         </NavbarBrand>
 
