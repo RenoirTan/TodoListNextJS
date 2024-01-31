@@ -7,8 +7,41 @@ import { Todo } from "@prisma/client";
 import { auth } from "@/auth";
 import { todos as todosUrl } from "@/lib/urls";
 
-export async function getRecentTodos(authorId: string) {
-  return await prisma.todo.findMany({ where: { authorId }});
+const TODOS_PER_PAGE = 10;
+
+export async function getRecentTodos(authorId: string, page?: number, query?: string) {
+  const skips = Math.max(0, (page) ? (page - 1) : 0);
+  const trimmed = (query) ? query.trim() : "";
+
+  return await prisma.todo.findMany({
+    where: {
+      authorId,
+      OR: [
+        { title: { contains: trimmed, mode: "insensitive" } },
+        { description: { contains: trimmed, mode: "insensitive" } }
+      ]
+    },
+    orderBy: [{ updatedAt: "desc" }],
+    skip: TODOS_PER_PAGE * skips,
+    take: TODOS_PER_PAGE
+  });
+}
+
+export async function countTodos(authorId: string, query?: string) {
+  const trimmed = (query) ? query.trim() : "";
+  return await prisma.todo.count({
+    where: {
+      authorId,
+      OR: [
+        { title: { contains: trimmed, mode: "insensitive" } },
+        { description: { contains: trimmed, mode: "insensitive" } }
+      ]
+    }
+  });
+}
+
+export async function todosTotalPages(totalTodos: number) {
+  return Math.ceil(totalTodos / TODOS_PER_PAGE);
 }
 
 export async function getTodo(id: string, authorId: string): Promise<Todo | null> {

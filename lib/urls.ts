@@ -6,7 +6,9 @@ export function objectToQuery(object: { [key: string]: string | number }): URLSe
   const usp = new URLSearchParams();
   for (const [key, value] of Object.entries(object)) {
     let stringed;
-    if (typeof value === "string") {
+    if (value === undefined || value === null || value === "") {
+      continue;
+    } else if (typeof value === "string") {
       stringed = value;
     } else if (typeof value === "number") {
       stringed = value.toString();
