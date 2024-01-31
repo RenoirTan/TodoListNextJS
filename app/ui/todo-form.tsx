@@ -1,4 +1,5 @@
 import { TodoState, deleteTodo } from "@/lib/todos";
+import { ArrowUpTrayIcon, TrashIcon } from "@heroicons/react/16/solid";
 import { Button, Checkbox, Input } from "@nextui-org/react";
 import { Todo } from "@prisma/client";
 
@@ -14,10 +15,10 @@ export default function TodoForm({
   const deleteTodoById = (todo) ? deleteTodo.bind(null, todo.id) : undefined;
 
   return (
-    <div>
-      <form action={dispatch}>
-        <div>
-          <label htmlFor="title">Title</label>
+    <div className="flex flex-col justify-center gap-y-5">
+      <form action={dispatch} className="flex flex-col justify-center gap-y-5">
+        <div className="flex flex-col gap-y-2">
+          <label htmlFor="title" className="text-xl font-semibold">Title</label>
           <Input
             id="title"
             name="title"
@@ -26,8 +27,8 @@ export default function TodoForm({
             errorMessage={state.errors?.title?.join("\n")}
           />
         </div>
-        <div>
-          <label htmlFor="description">Description</label>
+        <div className="flex flex-col gap-y-2">
+          <label htmlFor="description" className="text-xl font-semibold">Description</label>
           <Input
             id="description"
             name="description"
@@ -51,10 +52,18 @@ export default function TodoForm({
         {state.message && <p className="text-red text-center whitespace-pre-wrap">
           {state.message}
         </p>}
-        <Button type="submit" color="primary" variant="shadow">Submit</Button>
+        <Button type="submit" color="primary" variant="shadow" className="w-full md:max-w-fit">
+          <div className="flex flex-row items-center gap-2">
+            <ArrowUpTrayIcon className="h-[14px] w-[14px]" />
+            <p>Submit</p>
+          </div>
+        </Button>
       </form>
       {deleteTodoById && <form action={deleteTodoById}>
-        <Button type="submit" color="danger" variant="shadow">Delete</Button>
+        <Button type="submit" color="danger" variant="shadow" className="w-full md:max-w-fit">
+          <TrashIcon className="h-[14px] w-[14px]" />
+          <p>Delete</p>
+        </Button>
       </form>}
     </div>
   );
