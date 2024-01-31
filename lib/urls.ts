@@ -34,9 +34,9 @@ export const login = () => "/login";
 
 export const register = () => "/register";
 
-export const changePassword = () => "/change-password";
+export const changePassword = () => "/settings/change-password";
 
-export const changeName = () => "/change-name";
+export const changeName = () => "/settings/change-name";
 
 export const createTodo = () => "/create";
 
