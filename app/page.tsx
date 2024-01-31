@@ -10,7 +10,7 @@ export default async function Home() {
       <div className="flex place-content-center h-full">
         <div className="mx-auto flex flex-col justify-center">
           <div className="mb-6">
-            <h1 className="text-center text-5xl font-extrabold tracking-wide mb-3">Todos</h1>
+            <h1 className="text-center text-5xl font-extrabold tracking-wide mb-3 bg-clip-text text-transparent bg-gradient-to-tr from-orchid to-cyan">Todos</h1>
             <p className="text-center text-silver/75">Store reminders and tasks on any device.</p>
           </div>
           <div className="flex justify-center">
