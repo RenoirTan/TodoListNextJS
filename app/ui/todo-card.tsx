@@ -24,7 +24,7 @@ export default function TodoCard({ todo }: { todo: Todo }) {
               {(todo.complete) ? (
                 <>
                   <p>Complete</p>
-                  <CheckCircleIcon className="h-[16px] w-[16px] text-cyan" />
+                  <CheckCircleIcon className="h-[16px] w-[16px] text-mint-green" />
                 </>
               ) : (
                 <>
