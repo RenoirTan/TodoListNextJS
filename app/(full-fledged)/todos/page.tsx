@@ -25,7 +25,7 @@ export default async function Page({
   const tableKey = `${(searchParams.page) || 1} ${(searchParams.query) || ""}`;
 
   return (
-    <div className="flex justify-center mt-8"> {/* TODO: Remove mt-24 */}
+    <div className="flex justify-center mt-8">
       <div className="flex flex-col w-4/5 md:max-w-screen-sm items-center gap-y-8">
         {/* HELLO */}
         <div className="flex flex-col text-center gap-y-2">
