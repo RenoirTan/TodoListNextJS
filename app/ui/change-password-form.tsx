@@ -7,7 +7,7 @@ import CredentialsFormTitle from "./credentials-form-title";
 import PasswordInput from "./password-input";
 import SubmitButton from "./submit-button";
 
-export default async function ChangePasswordForm() {
+export default function ChangePasswordForm() {
   const initialState = { message: "", errors: {} };
   const [state, dispatch] = useFormState(formChangePassword, initialState);
 

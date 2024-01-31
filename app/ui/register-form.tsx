@@ -8,7 +8,7 @@ import EmailInput from "./email-input";
 import PasswordInput from "./password-input";
 import SubmitButton from "./submit-button";
 
-export default async function RegisterForm() {
+export default function RegisterForm() {
   const initialState = { message: "", errors: {} };
   const [state, dispatch] = useFormState(formCreateUser, initialState);
 

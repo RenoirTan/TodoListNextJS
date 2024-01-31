@@ -1,10 +1,11 @@
 import { comparePassword, getUserByEmail, getUser } from "@/lib/users";
 import { PrismaAdapter } from "@auth/prisma-adapter";
-import NextAuth from "next-auth";
+import NextAuth, { Session } from "next-auth";
 import CredentialsProvider from "next-auth/providers/credentials";
 import { z } from "zod";
 import prisma from "@/db";
 import { authConfig } from "./auth.config";
+import { JWT } from "next-auth/jwt";
 
 export const credentialsValidator = z.object({
   email: z.string().email(),
@@ -69,8 +70,10 @@ const { handlers: { GET, POST }, auth, signIn, signOut } = NextAuth({
   },
   callbacks: {
     // https://logfetch.com/next-auth-get-user-database-id-from-session/
-    async session({ session, token, trigger }) {
-      if (session?.user) {
+    // type annotation is temporary
+    // current issue: https://github.com/nextauthjs/next-auth/issues/9633#issuecomment-1900085171
+    async session({ session, token, trigger }: { session: Session; token?: JWT; trigger?: "update"}) {
+      if (session?.user && token?.sub) {
         session.user.id = token.sub;
         if (trigger === "update" && session.user.id) {
           const user = await getUser(session.user.id);

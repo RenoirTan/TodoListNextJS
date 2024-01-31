@@ -7,7 +7,7 @@ import CredentialsFormTitle from "./credentials-form-title";
 import CredentialsInput from "./credentials-input";
 import SubmitButton from "./submit-button";
 
-export default async function ChangeNameFormInner({ userName }: { userName?: string | null; }) {
+export default function ChangeNameFormInner({ userName }: { userName?: string | null; }) {
   const [state, dispatch] = useFormState(formChangeName, "");
 
   return (
