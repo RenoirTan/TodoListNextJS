@@ -1,7 +1,8 @@
 import { TodoState, deleteTodo } from "@/lib/todos";
 import { ArrowUpTrayIcon, TrashIcon } from "@heroicons/react/16/solid";
-import { Button, Checkbox, Input, Textarea } from "@nextui-org/react";
+import { Button, Checkbox, Divider, Input, Textarea } from "@nextui-org/react";
 import { Todo } from "@prisma/client";
+import Datex from "./datex";
 
 export default function TodoForm({
   todo,
@@ -59,6 +60,11 @@ export default function TodoForm({
         {state.message && <p className="text-red text-center whitespace-pre-wrap">
           {state.message}
         </p>}
+        {(todo) && <div className="flex flex-row gap-x-2 text-xs opacity-70">
+          <p>Created on <Datex date={todo.createdAt} /></p>
+          <Divider orientation="vertical" />
+          <p>Last updated on <Datex date={todo.updatedAt} /></p>
+        </div>}
         <Button type="submit" color="primary" variant="shadow" className="w-full md:max-w-fit">
           <div className="flex flex-row items-center gap-2">
             <ArrowUpTrayIcon className="h-[1em] w-[1em]" />
