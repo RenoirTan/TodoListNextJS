@@ -18,20 +18,27 @@ export default function TodoCard({ todo }: { todo: Todo }) {
     <div className="w-full">
       <div className="border rounded-2xl border-gray">
         <Card>
-          <CardHeader className="justify-between">
-            <h3 className="text-xl truncate">{todo.title}</h3>
-            <div className="text-sm text-neutral-100 flex flex-row gap-x-2 items-center">
-              {(todo.complete) ? (
-                <>
-                  <p>Complete</p>
-                  <CheckCircleIcon className="h-[16px] w-[16px] text-mint-green" />
-                </>
-              ) : (
-                <>
-                  <p>Incomplete</p>
-                  <XCircleIcon className="h-[16px] w-[16px] text-red" />
-                </>
-              )}
+          <CardHeader className="flex flex-col items-start gap-y-2">
+            <div className="flex flex-row justify-between w-full">
+              <h3 className="text-xl truncate">{todo.title}</h3>
+              <div className="text-sm text-neutral-100 flex flex-row gap-x-2 items-center">
+                {(todo.complete) ? (
+                  <>
+                    <p>Complete</p>
+                    <CheckCircleIcon className="h-[16px] w-[16px] text-mint-green" />
+                  </>
+                ) : (
+                  <>
+                    <p>Incomplete</p>
+                    <XCircleIcon className="h-[16px] w-[16px] text-red" />
+                  </>
+                )}
+              </div>
+            </div>
+            <div className="flex flex-row gap-x-2">
+              <p className="text-xs">Created on </p>
+              <Divider orientation="vertical" />
+              <p className="text-xs">Last updated on </p>
             </div>
           </CardHeader>
           <Divider />
