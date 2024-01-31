@@ -40,9 +40,16 @@ Todos is a note-taking app that allows you to keep track of what you need to do 
  - `npm`
  - `npx`
 
-## Helpful Shell Commands
+## Usage
 
 ### Setup
+
+NextAuth and the postgres database requires additional configuration through environment variables/files. Copy `.env.example` to `.env` and supply `POSTGRES_PASSWORD` and `NEXTAUTH_SECRET` with your own randomly generated secret items.
+
+```bash
+cp .env.example .env
+nvim .env # do stuff
+```
 
 Your computer probably doesn't have a seeded database up and running for Todos. In that case, run the following commands to setup `prisma` and `postgres`.
 
