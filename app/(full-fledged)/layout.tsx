@@ -1,10 +1,14 @@
 import React from "react";
 import Navbar from "@/app/ui/navbar";
+import { auth } from "@/auth";
 
-export default function Layout({ children }: { children: React.ReactNode; }) {
+export default async function Layout({ children }: { children: React.ReactNode; }) {
+  const session = await auth();
+  const loggedIn = !!(session?.user);
+
   return (
     <main>
-      <Navbar />
+      <Navbar loggedIn={loggedIn} />
       <div className="mb-8">
         {children}
       </div>

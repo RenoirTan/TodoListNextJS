@@ -20,7 +20,7 @@ import {
 import LogoutButton from "@/app/ui/logout-button";
 import { useState } from "react";
 
-export default function Navbar() {
+export default function Navbar({ loggedIn }: { loggedIn?: boolean }) {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
 
   return (
@@ -39,33 +39,39 @@ export default function Navbar() {
       </NavbarContent>
 
       <NavbarContent className="hidden md:flex md:flex-grow md:flex-row justify-end gap-4" justify="end">
-        <NavbarItem>
-          <TodosItem />
-        </NavbarItem>
-        <NavbarItem>
-          <LoginItem />
-        </NavbarItem>
-        <NavbarItem>
-          <LogoutItem />
-        </NavbarItem>
-        <NavbarItem>
-          <SettingsItem />
-        </NavbarItem>
+        {loggedIn ? (<>
+          <NavbarItem>
+            <TodosItem />
+          </NavbarItem>
+          <NavbarItem>
+            <LogoutItem />
+          </NavbarItem>
+          <NavbarItem>
+            <SettingsItem />
+          </NavbarItem>
+        </>) : (<>
+          <NavbarItem>
+            <LoginItem />
+          </NavbarItem>
+        </>)}
       </NavbarContent>
 
       <NavbarMenu>
-        <NavbarMenuItem>
-          <TodosItem />
-        </NavbarMenuItem>
-        <NavbarMenuItem>
-          <LoginItem />
-        </NavbarMenuItem>
-        <NavbarMenuItem>
-          <LogoutItem />
-        </NavbarMenuItem>
-        <NavbarMenuItem>
-          <SettingsItem />
-        </NavbarMenuItem>
+        {loggedIn ? (<>
+          <NavbarMenuItem>
+            <TodosItem />
+          </NavbarMenuItem>
+          <NavbarMenuItem>
+            <LogoutItem />
+          </NavbarMenuItem>
+          <NavbarMenuItem>
+            <SettingsItem />
+          </NavbarMenuItem>
+        </>) : (<>
+          <NavbarMenuItem>
+            <LoginItem />
+          </NavbarMenuItem>
+        </>)}
       </NavbarMenu>
     </NavbarInner>
   );

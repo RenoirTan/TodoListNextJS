@@ -2,11 +2,15 @@ import Link from "next/link";
 import { register as registerUrl } from "@/lib/urls";
 import { Button } from "@nextui-org/react";
 import Navbar from "@/app/ui/navbar";
+import { auth } from "@/auth";
 
 export default async function Home() {
+  const session = await auth();
+  const loggedIn = !!(session?.user);
+
   return (
     <main className="h-screen flex flex-col">
-      <Navbar />
+      <Navbar loggedIn={loggedIn} />
       <div className="flex place-content-center h-full">
         <div className="mx-auto flex flex-col justify-center">
           <div className="mb-6">
