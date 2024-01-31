@@ -10,7 +10,7 @@ import { todos as todosUrl } from "@/lib/urls";
 const TODOS_PER_PAGE = 10;
 
 export async function getRecentTodos(authorId: string, page?: number, query?: string) {
-  const skips = (page) ? (page - 1) : 0;
+  const skips = Math.max(0, (page) ? (page - 1) : 0);
   const trimmed = (query) ? query.trim() : "";
 
   return await prisma.todo.findMany({
