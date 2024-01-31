@@ -1,7 +1,7 @@
 version: "3"
 name: "todolistnextjs"
 services:
-  app:
+  dev:
     build:
       context: .
       target: dev
@@ -16,6 +16,19 @@ services:
       - 3000:3000
     depends_on:
       - postgres
+
+  prod:
+    build:
+      context: .
+      target: prod
+    command: npm run start
+    environment:
+      DATABASE_URL: "${INNER_DATABASE_URL}"
+    ports:
+      - 3000:3000
+    depends_on:
+      - postgres
+
   postgres: # database url must have 'postgres' as the host, not 'localhost'
     image: postgres:16.1
     environment:

@@ -11,3 +11,11 @@ COPY --from=deps /app/node_modules ./node_modules
 COPY . .
 RUN npx prisma generate
 CMD ["npm", "run", "dev"]
+
+FROM base as prod
+WORKDIR /app
+COPY --from=deps /app/node_modules ./node_modules
+COPY . .
+RUN npx prisma generate
+RUN npm run build
+CMD ["npm", "run", "start"]
