@@ -5,11 +5,10 @@ import TodosList from "@/app/ui/todos-list";
 import { auth } from "@/auth";
 import { getUser } from "@/lib/users";
 import { notFound } from "next/navigation";
-import {
-  createTodo as createTodoUrl
-} from "@/lib/urls";
-import { Button, Input } from "@nextui-org/react";
-import { DocumentPlusIcon, MagnifyingGlassIcon } from "@heroicons/react/16/solid";
+import { createTodo as createTodoUrl } from "@/lib/urls";
+import { Button } from "@nextui-org/react";
+import { DocumentPlusIcon } from "@heroicons/react/16/solid";
+import TodosSearchBox from "@/app/ui/todos-search-box";
 
 export default async function Page({
   searchParams
@@ -21,6 +20,8 @@ export default async function Page({
   if (!id) notFound();
 
   const user = await getUser(id);
+
+  const tableKey = `${(searchParams.page) || 1} ${(searchParams.query) || ""}`;
 
   return (
     <div className="flex justify-center mt-8"> {/* TODO: Remove mt-24 */}
@@ -34,37 +35,19 @@ export default async function Page({
         <Link href={changePasswordUrl()}>Change Password</Link>
         <Link href={changeNameUrl()}>Change Name</Link>
         */}
-        <div className="w-full flex flex-col md:flex-row gap-4 items-stretch">
-          <Input
-            id="query"
-            type="text"
-            variant="flat"
-            placeholder="Search"
-            defaultValue={searchParams.query}
-            aria-label="Search Todo Items"
-          />
-          <div className="flex flex-row gap-4 justify-center">
-            <Button
-              type="button"
-              className="h-full bg-gradient-to-tr from-mint-green to-cyan text-dark-gray py-4"
-            >
+        <div className="w-full flex flex-col md:flex-row gap-4 items-center">
+          <TodosSearchBox />
+          <Link href={createTodoUrl()}>
+            <Button type="button" className="h-full bg-gradient-to-tr from-mint-green to-cyan text-dark-gray py-4">
               <div className="flex flex-row gap-2 items-center h-full">
-                <MagnifyingGlassIcon className="h-[24px] w-[24px] md:h-[18px] md:w-[18px]" />
-                <p className="hidden md:block text-lg">Search</p>
+                <DocumentPlusIcon className="h-[18px] w-[18px]" />
+                <p className="block text-lg">Create</p>
               </div>
             </Button>
-            <Link href={createTodoUrl()}>
-              <Button type="button" className="h-full bg-gradient-to-tr from-vermillion to-lilac text-dark-gray py-4">
-                <div className="flex flex-row gap-2 items-center h-full">
-                  <DocumentPlusIcon className="h-[24px] w-[24px] md:h-[18px] md:w-[18px]" />
-                  <p className="hidden md:block text-lg">Create</p>
-                </div>
-              </Button>
-            </Link>
-          </div>
+          </Link>
         </div>
         <div className="w-full md:w-4/5">
-          <Suspense fallback={<TodosSkeleton />}>
+          <Suspense key={tableKey} fallback={<TodosSkeleton />}>
             <TodosList
               page={searchParams.page}
               query={searchParams.query}

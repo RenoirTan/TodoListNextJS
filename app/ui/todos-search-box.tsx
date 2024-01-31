@@ -1,0 +1,39 @@
+"use client";
+
+import {
+  todos as todosUrl
+} from "@/lib/urls";
+import { Input } from "@nextui-org/react";
+import { MagnifyingGlassIcon } from "@heroicons/react/16/solid";
+import { useRouter, useSearchParams } from "next/navigation";
+
+// https://nextjs.org/learn/dashboard-app/adding-search-and-pagination
+export default function TodosSearchBox() {
+  const searchParams = useSearchParams();
+  const { replace } = useRouter();
+
+  function handleSearch(queryString?: string) {
+    if (queryString) {
+      replace(todosUrl({ query: queryString }));
+    } else {
+      replace(todosUrl({}));
+    }
+  }
+
+  return (
+    <div className="w-full">
+      <Input
+        id="query"
+        type="text"
+        variant="flat"
+        placeholder="Search"
+        defaultValue={searchParams?.get("query") || undefined}
+        onChange={(event) => {
+          handleSearch(event.target.value);
+        }}
+        startContent={<MagnifyingGlassIcon className="h-[24px] w-[24px] ms-1 me-3" />}
+        aria-label="Search Todo Items"
+      />
+    </div>
+  );
+}
