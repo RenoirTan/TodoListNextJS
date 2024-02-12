@@ -1,3 +1,4 @@
+import { clsx } from "clsx";
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import "./globals.css";
@@ -20,7 +21,10 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={inter.className}>
+      <body className={clsx(
+        inter.className,
+        "text-calm-black dark:text-white bg-gradient-to-b from-[#ffffff] to-[#eeeeee] dark:from-calm-black dark:to-black"
+      )}>
         <Providers>
           {children}
         </Providers>
