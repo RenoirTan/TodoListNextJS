@@ -17,12 +17,12 @@ export default function TodoCard({ todo }: { todo: Todo }) {
 
   return (
     <div className="w-full">
-      <div className="border rounded-2xl border-gray">
-        <Card>
+      <div className="border rounded-2xl border-silver dark:border-gray">
+        <Card className="bg-[#f0f0f0] dark:bg-black">
           <CardHeader className="flex flex-col items-start gap-y-2">
             <div className="flex flex-row justify-between w-full">
               <h3 className="text-xl truncate">{todo.title}</h3>
-              <div className="text-sm text-neutral-100 flex flex-row gap-x-2 items-center">
+              <div className="text-sm text-neutral-600 dark:text-neutral-400 flex flex-row gap-x-2 items-center">
                 {(todo.complete) ? (
                   <>
                     <p>Complete</p>
