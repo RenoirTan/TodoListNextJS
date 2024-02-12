@@ -16,22 +16,44 @@ export default async function Home() {
         <div className="mx-auto flex flex-col items-center justify-center">
 
           <div className="block md:hidden">
-            <Image
-              className="rounded-t-3xl shadow-lg shadow-gray"
-              src="/android-smushed.jpg"
-              alt="Screenshot on Android"
-              height={265}
-              width={180}
-            />
+            <div className="hidden dark:block">
+              <Image
+                className="rounded-t-3xl shadow-sm shadow-gray"
+                src="/android-smushed.jpg"
+                alt="Screenshot on Android"
+                height={265}
+                width={180}
+              />
+            </div>
+            <div className="block dark:hidden">
+              <Image
+                className="rounded-t-3xl shadow-sm shadow-gray"
+                src="/android-light-smushed.jpg"
+                alt="Screenshot on Android"
+                height={288}
+                width={180}
+              />
+            </div>
           </div>
           <div className="hidden md:block">
-            <Image
-              className="rounded-t-xl shadow-lg shadow-gray"
-              src="/desktop.png"
-              alt="Screenshot on Desktop"
-              height={270}
-              width={480}
-            />
+            <div className="hidden dark:block">
+              <Image
+                className="rounded-t-xl shadow-sm shadow-gray"
+                src="/desktop.png"
+                alt="Screenshot on Desktop"
+                height={270}
+                width={480}
+              />
+            </div>
+            <div className="block dark:hidden">
+              <Image
+                className="rounded-t-xl shadow-sm shadow-gray"
+                src="/desktop-light.png"
+                alt="Screenshot on Desktop"
+                height={270}
+                width={480}
+              />
+            </div>
           </div>
 
           <div className="mb-6 mt-6">
