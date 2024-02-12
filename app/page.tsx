@@ -36,7 +36,7 @@ export default async function Home() {
 
           <div className="mb-6 mt-6">
             <h1 className="text-center text-5xl font-extrabold tracking-wide mb-3 bg-clip-text text-transparent bg-gradient-to-t from-orchid to-cyan">Todos</h1>
-            <p className="text-center text-silver/75">Store reminders and tasks on any device.</p>
+            <p className="text-center text-dark-gray/75 dark:text-silver/75">Store reminders and tasks on any device.</p>
           </div>
           <div className="flex justify-center">
             <Link href={registerUrl()}>
@@ -44,7 +44,7 @@ export default async function Home() {
                 radius="full"
                 className="animate-subtle-pulse bg-gradient-to-tr from-blue-violet to-cyan p-6"
               >
-                <p className="text-center text-xl font-bold text-white">Try It Out Now!</p>
+                <p className="text-center text-xl font-bold dark:text-white">Try It Out Now!</p>
               </Button>
             </Link>
           </div>
