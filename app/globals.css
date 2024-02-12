@@ -2,6 +2,7 @@
 @tailwind components;
 @tailwind utilities;
 
+/*
 html :not(.dark) {
   :root {
     --foreground-rgb: 0, 0, 0;
@@ -10,7 +11,7 @@ html :not(.dark) {
   }
 }
 
-/*@media (prefers-color-scheme: dark)*/
+
 html .dark {
   :root {
     --foreground-rgb: 255, 255, 255;
@@ -28,6 +29,7 @@ body {
     )
     rgb(var(--background-start-rgb));
 }
+*/
 
 @layer utilities {
   .text-balance {
