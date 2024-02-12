@@ -23,7 +23,7 @@ export default function RootLayout({
     <html lang="en">
       <body className={clsx(
         inter.className,
-        "text-calm-black dark:text-white bg-gradient-to-b from-[#ffffff] to-[#eeeeee] dark:from-calm-black dark:to-black"
+        "min-h-screen text-calm-black dark:text-white bg-gradient-to-b from-[#ffffff] to-[#eeeeee] dark:from-black dark:to-[#000000]"
       )}>
         <Providers>
           {children}
