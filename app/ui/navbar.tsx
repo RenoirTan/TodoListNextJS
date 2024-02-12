@@ -22,6 +22,7 @@ import {
 import LogoutButton from "@/app/ui/logout-button";
 import { useState } from "react";
 import { ArrowRightEndOnRectangleIcon, ClipboardDocumentIcon, Cog6ToothIcon } from "@heroicons/react/16/solid";
+import ThemeSwitcher from "@/app/ui/theme-switcher";
 
 export default function Navbar({ loggedIn }: { loggedIn?: boolean }) {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -38,7 +39,7 @@ export default function Navbar({ loggedIn }: { loggedIn?: boolean }) {
         <NavbarBrand>
           <Link href={indexUrl()} className="flex flex-row items-center gap-x-2">
             <BrandMini />
-            <h2 className="font-semibold text-xl bg-clip-text text-transparent bg-gradient-to-r from-violet to-vermillion">Todos</h2>
+            <h2 className="font-semibold text-xl bg-clip-text text-transparent bg-gradient-to-r from-blue-violet to-french-fuchsia dark:from-violet dark:to-vermillion">Todos</h2>
           </Link>
         </NavbarBrand>
 
@@ -53,6 +54,9 @@ export default function Navbar({ loggedIn }: { loggedIn?: boolean }) {
       </NavbarContent>
 
       <NavbarContent className="hidden md:flex md:flex-grow md:flex-row justify-end gap-4" justify="end">
+        <NavbarItem>
+          <ThemeSwitcher />
+        </NavbarItem>
         {loggedIn ? (<>
           <NavbarItem>
             <TodosItem />
@@ -75,6 +79,9 @@ export default function Navbar({ loggedIn }: { loggedIn?: boolean }) {
       </NavbarItem>}
 
       <NavbarMenu>
+        <NavbarMenuItem>
+          <ThemeSwitcher />
+        </NavbarMenuItem>
         {loggedIn ? (<>
           <NavbarMenuItem>
             <TodosItem closeMenu={closeMenu} />
@@ -111,7 +118,7 @@ function LogoutItem() {
 function RegisterItem({ closeMenu }: { closeMenu?: () => void }) {
   return (
     <Link href={registerUrl()} onClick={closeMenu}>
-      <Button className="rounded-full bg-gradient-to-tr from-blue-violet to-cyan">
+      <Button className="rounded-full bg-gradient-to-tr from-blue-violet to-cyan text-[#ffffff]">
         <p className="font-semibold">Register</p>
       </Button>
     </Link>

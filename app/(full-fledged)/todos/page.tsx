@@ -32,9 +32,9 @@ export default async function Page({
         <div className="flex flex-col text-center gap-y-2">
           {/* https://tailwindcss.com/docs/background-clip#cropping-to-text */}
           {(user?.name) ? <p className="text-xl">
-            Hello, <span className="bg-clip-text text-transparent bg-gradient-to-r from-french-fuchsia to-violet font-semibold me-0.5">{user?.name}</span>!
+            Hello, <span className="bg-clip-text text-transparent bg-gradient-to-r from-french-fuchsia to-blue-violet dark:to-violet font-semibold me-0.5">{user?.name}</span>!
           </p> : <p className="text-xl">
-            <span className="bg-clip-text text-transparent bg-gradient-to-r from-french-fuchsia to-violet font-semibold">Hello!</span>
+            <span className="bg-clip-text text-transparent bg-gradient-to-r from-french-fuchsia to-blue-violet dark:to-violet font-semibold">Hello!</span>
           </p>
           }
           <h1 className="text-3xl font-bold">Here is your <span className="bg-clip-text text-transparent bg-gradient-to-tr from-french-fuchsia to-violet font-extrabold">Todo List</span></h1>

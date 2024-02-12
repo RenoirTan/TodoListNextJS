@@ -9,7 +9,7 @@ export default async function Layout({ children }: { children: React.ReactNode; 
   return (
     <main>
       <Navbar loggedIn={loggedIn} />
-      <div className="mb-8">
+      <div className="pb-8">
         {children}
       </div>
     </main>

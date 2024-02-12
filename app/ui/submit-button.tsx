@@ -6,7 +6,7 @@ export default function SubmitButton({ children }: { children?: React.ReactNode 
   const { pending } = useFormStatus();
 
   return (
-    <Button className="my-2" aria-disabled={pending} color="primary" variant="shadow" type="submit">
+    <Button className="my-2 dark:shadow-lg dark:shadow-blue-900" aria-disabled={pending} color="primary" type="submit">
       {children}
     </Button>
   );

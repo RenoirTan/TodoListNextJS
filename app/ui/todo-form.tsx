@@ -65,7 +65,7 @@ export default function TodoForm({
           <Divider orientation="vertical" />
           <p>Last updated on <Datex date={todo.updatedAt} /></p>
         </div>}
-        <Button type="submit" color="primary" variant="shadow" className="w-full md:max-w-fit">
+        <Button type="submit" color="primary" className="w-full md:max-w-fit dark:shadow-lg dark:shadow-blue-800">
           <div className="flex flex-row items-center gap-2">
             <ArrowUpTrayIcon className="h-[1em] w-[1em]" />
             <p>Submit</p>
@@ -73,7 +73,7 @@ export default function TodoForm({
         </Button>
       </form>
       {deleteTodoById && <form action={deleteTodoById} className="w-full flex flex-col items-center">
-        <Button type="submit" color="danger" variant="shadow" className="w-full md:max-w-fit">
+        <Button type="submit" color="danger" className="w-full md:max-w-fit dark:shadow-lg dark:shadow-rose-800">
           <TrashIcon className="h-[1em] w-[1em]" />
           <p>Delete</p>
         </Button>
