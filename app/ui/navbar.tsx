@@ -22,6 +22,7 @@ import {
 import LogoutButton from "@/app/ui/logout-button";
 import { useState } from "react";
 import { ArrowRightEndOnRectangleIcon, ClipboardDocumentIcon, Cog6ToothIcon } from "@heroicons/react/16/solid";
+import ThemeSwitcher from "@/app/ui/theme-switcher";
 
 export default function Navbar({ loggedIn }: { loggedIn?: boolean }) {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -53,6 +54,9 @@ export default function Navbar({ loggedIn }: { loggedIn?: boolean }) {
       </NavbarContent>
 
       <NavbarContent className="hidden md:flex md:flex-grow md:flex-row justify-end gap-4" justify="end">
+        <NavbarItem>
+          <ThemeSwitcher />
+        </NavbarItem>
         {loggedIn ? (<>
           <NavbarItem>
             <TodosItem />
@@ -75,6 +79,9 @@ export default function Navbar({ loggedIn }: { loggedIn?: boolean }) {
       </NavbarItem>}
 
       <NavbarMenu>
+        <NavbarMenuItem>
+          <ThemeSwitcher />
+        </NavbarMenuItem>
         {loggedIn ? (<>
           <NavbarMenuItem>
             <TodosItem closeMenu={closeMenu} />
