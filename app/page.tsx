@@ -42,9 +42,9 @@ export default async function Home() {
             <Link href={registerUrl()}>
               <Button
                 radius="full"
-                className="animate-subtle-pulse bg-gradient-to-tr from-blue-violet to-cyan p-6"
+                className="animate-subtle-pulse bg-gradient-to-tr from-blue-violet to-cyan p-6 shadow-xl"
               >
-                <p className="text-center text-xl font-bold dark:text-white">Try It Out Now!</p>
+                <p className="text-center text-xl font-bold text-[#ffffff]">Try It Out Now!</p>
               </Button>
             </Link>
           </div>

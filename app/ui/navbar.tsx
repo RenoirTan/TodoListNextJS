@@ -111,7 +111,7 @@ function LogoutItem() {
 function RegisterItem({ closeMenu }: { closeMenu?: () => void }) {
   return (
     <Link href={registerUrl()} onClick={closeMenu}>
-      <Button className="rounded-full bg-gradient-to-tr from-blue-violet to-cyan">
+      <Button className="rounded-full bg-gradient-to-tr from-blue-violet to-cyan text-[#ffffff]">
         <p className="font-semibold">Register</p>
       </Button>
     </Link>
