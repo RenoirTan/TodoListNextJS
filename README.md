@@ -51,6 +51,8 @@ cp .env.example .env
 nvim .env # do stuff
 ```
 
+You may also want OAuth support using GitHub. In that case, create an OAuth app on Github and copy the client ID and client secret into `.env`.
+
 Your computer probably doesn't have a seeded database up and running for Todos. In that case, run the following commands to setup `prisma` and `postgres`.
 
 ```bash
