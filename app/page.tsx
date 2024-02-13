@@ -4,6 +4,7 @@ import { register as registerUrl } from "@/lib/urls";
 import { Button } from "@nextui-org/react";
 import Navbar from "@/app/ui/navbar";
 import { auth } from "@/auth";
+import BigSigninButton from "./ui/big-signin-button";
 
 export default async function Home() {
   const session = await auth();
@@ -69,6 +70,9 @@ export default async function Home() {
                 <p className="text-center text-xl font-bold text-[#ffffff]">Try It Out Now!</p>
               </Button>
             </Link>
+          </div>
+          <div className="flex justify-center">
+            <BigSigninButton />
           </div>
         </div>
       </div>
