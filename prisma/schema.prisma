@@ -24,7 +24,7 @@ model User {
   accounts      Account[]
   sessions      Session[]
 
-  @@map("user")
+  @@map("users")
 }
 
 model Account {
@@ -53,6 +53,15 @@ model Session {
   userId       String
   expires      DateTime
   user         User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  @@map("sessions")
+}
+
+model VerificationToken {
+  identifier String
+  token      String   @unique
+  expires    DateTime
+
+  @@unique([identifier, token])
 }
 
 // https://docs.hanko.io/tutorials/nextjs-todo

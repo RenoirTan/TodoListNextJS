@@ -62,8 +62,8 @@ const credentialsProvider = CredentialsProvider({
 
 const githubProvider = GithubProvider({
   id: "github",
-  clientId: process.env.GITHUB_ID,
-  clientSecret: process.env.GITHUB_SECRET
+  clientId: process.env.GITHUB_CLIENT_ID,
+  clientSecret: process.env.GITHUB_CLIENT_SECRET
 });
 
 const { handlers: { GET, POST }, auth, signIn, signOut } = NextAuth({
