@@ -2,6 +2,7 @@ import { comparePassword, getUserByEmail, getUser } from "@/lib/users";
 import { PrismaAdapter } from "@auth/prisma-adapter";
 import NextAuth, { Session } from "next-auth";
 import CredentialsProvider from "next-auth/providers/credentials";
+import GithubProvider from "next-auth/providers/github";
 import { z } from "zod";
 import prisma from "@/db";
 import { authConfig } from "./auth.config";
@@ -35,6 +36,7 @@ export const changePasswordCredentialsValidator = createUserCredentialsObject
   .refine(passwordsMatchValidator, passwordsDontMatchParams());
 
 const credentialsProvider = CredentialsProvider({
+  id: "credentials",
   name: "Credentials",
   credentials: {
     email: { label: "Email", type: "text", placeholder: "Enter Email" },
@@ -58,11 +60,18 @@ const credentialsProvider = CredentialsProvider({
   }
 });
 
+const githubProvider = GithubProvider({
+  id: "github",
+  clientId: process.env.GITHUB_ID,
+  clientSecret: process.env.GITHUB_SECRET,
+});
+
 const { handlers: { GET, POST }, auth, signIn, signOut } = NextAuth({
   ...authConfig,
   adapter: PrismaAdapter(prisma),
   providers: [
-    credentialsProvider
+    credentialsProvider,
+    githubProvider
   ],
   secret: process.env.NEXTAUTH_SECRET as string,
   session: {

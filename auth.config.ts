@@ -10,5 +10,6 @@ export const authConfig = {
       return loggedIn;
     }
   },
-  providers: []
+  providers: [],
+  debug: process.env.NODE_ENV !== "production"
 } satisfies NextAuthConfig;
