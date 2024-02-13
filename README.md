@@ -16,6 +16,8 @@ Todos is a note-taking app that allows you to keep track of what you need to do 
  - Authentication using NextAuth's `CredentialsProvider`
  - Search bar
  - Pagination
+ - Light Mode
+ - OAuth2 (GitHub)
 
 ## Technologies Used
 
@@ -27,8 +29,6 @@ Todos is a note-taking app that allows you to keep track of what you need to do 
 
 ## Potential Feature Additions
 
- - Light Mode
- - OAuth2 (starting with GitHub)
  - Search filters
  - Reminder system (deadlines, email notifications, etc...)
 
