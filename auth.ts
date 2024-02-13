@@ -36,6 +36,7 @@ export const changePasswordCredentialsValidator = createUserCredentialsObject
   .refine(passwordsMatchValidator, passwordsDontMatchParams());
 
 const credentialsProvider = CredentialsProvider({
+  id: "credentials",
   name: "Credentials",
   credentials: {
     email: { label: "Email", type: "text", placeholder: "Enter Email" },
@@ -60,6 +61,7 @@ const credentialsProvider = CredentialsProvider({
 });
 
 const githubProvider = GithubProvider({
+  id: "github",
   clientId: process.env.GITHUB_ID,
   clientSecret: process.env.GITHUB_SECRET
 });

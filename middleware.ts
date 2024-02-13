@@ -8,11 +8,12 @@ export const config = {
   // matches everything except
   //  - /
   //  - /api/...
+  //  - /login
   //  - /register
   //  - /_next/static/...
   //  - /_next/image/...
   //  - /favicon.ico
   //  - /{...}.png
   // equivalent to `/^\/((?!api|register$|_next\/static|_next\/image|favicon\.ico$|.*\.png$).+)/g`
-  matcher: ["/((?!api|register$|_next/static|_next/image|favicon\\.ico$|.*\\.png$).+)"],
+  matcher: ["/((?!api|login$|register$|_next/static|_next/image|favicon\\.ico$|.*\\.png$).+)"],
 };
